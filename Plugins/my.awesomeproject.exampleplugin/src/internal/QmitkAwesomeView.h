@@ -25,7 +25,6 @@ PURPOSE.  See the above copyright notices for more information.
 #include "ui_QmitkAwesomeViewControls.h"
 
 
-
 /*!
   \brief QmitkAwesomeView
 
@@ -63,7 +62,5 @@ class QmitkAwesomeView : public QmitkFunctionality
 
 };
 
-
-
-#endif // _QMITKAwesomeView_H_INCLUDED
+#endif // QmitkAwesomeView_h
 
