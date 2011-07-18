@@ -26,6 +26,9 @@ PURPOSE.  See the above copyright notices for more information.
 // Qt
 #include <QMessageBox>
 
+// MyAwesomeLib
+#include <AwesomeImageFilter.h>
+
 const std::string QmitkAwesomeView::VIEW_ID = "my.awesomeproject.views.awesomeview";
 
 QmitkAwesomeView::QmitkAwesomeView()
@@ -99,7 +102,22 @@ void QmitkAwesomeView::DoImageProcessing()
       message << ".";
       MITK_INFO << message.str();
 
-      // TODO actually do something here...
+      // actually do something here...
+
+      // use the AwesomeImageFilter class from the MyAwesomeLib module
+      AwesomeImageFilter::Pointer awesomeFilter = AwesomeImageFilter::New();
+      awesomeFilter->SetInput(image);
+      awesomeFilter->SetOffset(m_Controls.spinboxOffset->value());
+      awesomeFilter->Update();
+
+      std::stringstream outputNodeName;
+      outputNodeName << node->GetName() << " offset by " << m_Controls.spinboxOffset->value();
+      mitk::Image::Pointer outputImage = awesomeFilter->GetOutput();
+      mitk::DataNode::Pointer outputNode = mitk::DataNode::New();
+      outputNode->SetData(outputImage);
+      outputNode->SetName(outputNodeName.str());
+
+      this->GetDataStorage()->Add(outputNode);
     }
   }
 }
