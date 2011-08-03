@@ -30,5 +30,5 @@ Supported Platforms
 Requirements
 ------------
 
-- CMake 2.8.2 or newer
+- CMake 2.8.4 or newer
 - Qt 4.6.2 or newer (it is also possible to create a MITK project without any Qt dependencies)

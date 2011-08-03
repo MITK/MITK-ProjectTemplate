@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.2)
+cmake_minimum_required(VERSION 2.8.4)
 
 # Change project and application name to your own
 set(MY_PROJECT_NAME AwesomeProject)
