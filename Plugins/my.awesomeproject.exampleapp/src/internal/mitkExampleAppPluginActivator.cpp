@@ -82,10 +82,10 @@ QString ExampleAppPluginActivator::GetQtHelpCollectionFile() const
 
   QString collectionFilename;
 //  QString na("n/a");
-//  if (na != Awesome_REVISION)
-//    collectionFilename = "AwesomeQtHelpCollection_" Awesome_REVISION ".qhc";
+//  if (na != MITK_REVISION)
+//    collectionFilename = "MitkExtQtHelpCollection_" MITK_REVISION ".qhc";
 //  else
-    collectionFilename = "AwesomeQtHelpCollection.qhc";
+    collectionFilename = "MitkExtQtHelpCollection.qhc";
 
   QFileInfo collectionFileInfo = context->getDataFile(collectionFilename);
   QFileInfo pluginFileInfo = QFileInfo(QUrl(context->getPlugin()->getLocation()).toLocalFile());
