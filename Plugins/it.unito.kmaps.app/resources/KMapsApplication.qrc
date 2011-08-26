@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="/KMapsApplication">
+    <file>icon_research.xpm</file>
+    <file>dce-icon.png</file>
+  </qresource>
+ </RCC>
