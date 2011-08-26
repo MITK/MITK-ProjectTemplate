@@ -41,8 +41,8 @@ PURPOSE.  See the above copyright notices for more information.
 #include <internal/berryQtShowViewAction.h>
 #include <internal/berryQtOpenPerspectiveAction.h>
 
-#include <QmitkAwesomeFileOpenAction.h>
-#include <QmitkAwesomeFileSaveProjectAction.h>
+#include <QmitkExtFileOpenAction.h>
+#include <QmitkExtFileSaveProjectAction.h>
 #include <QmitkFileExitAction.h>
 #include <QmitkCloseProjectAction.h>
 #include <QmitkStatusBar.h>
@@ -395,9 +395,9 @@ void QmitkAwesomeWorkbenchWindowAdvisor::PostWindowCreate()
  QMenu* fileMenu = menuBar->addMenu("&File");
  fileMenu->setObjectName("FileMenu");
 
- QAction* fileOpenAction = new QmitkAwesomeFileOpenAction(QIcon(":/org.mitk.gui.qt.ext/Load_48.png"), window);
+ QAction* fileOpenAction = new QmitkExtFileOpenAction(QIcon(":/org.mitk.gui.qt.ext/Load_48.png"), window);
  fileMenu->addAction(fileOpenAction);
- fileSaveProjectAction = new QmitkAwesomeFileSaveProjectAction(window);
+ fileSaveProjectAction = new QmitkExtFileSaveProjectAction(window);
  fileSaveProjectAction->setIcon(QIcon(":/org.mitk.gui.qt.ext/Save_48.png"));
  fileMenu->addAction(fileSaveProjectAction);
  closeProjectAction = new QmitkCloseProjectAction(window);

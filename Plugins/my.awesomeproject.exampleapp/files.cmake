@@ -2,8 +2,6 @@ SET(SRC_CPP_FILES
   QmitkAwesomeApplication.cpp
   QmitkAwesomeWorkbenchAdvisor.cpp
   QmitkAwesomeWorkbenchWindowAdvisor.cpp
-  QmitkAwesomeFileOpenAction.cpp
-  QmitkAwesomeFileSaveProjectAction.cpp
 )
 
 SET(INTERNAL_CPP_FILES
@@ -15,8 +13,6 @@ SET(MOC_H_FILES
   src/QmitkAwesomeApplication.h
   src/internal/mitkExampleAppPluginActivator.h
   src/internal/QmitkAwesomeWorkbenchWindowAdvisorHack.h
-  src/QmitkAwesomeFileOpenAction.h
-  src/QmitkAwesomeFileSaveProjectAction.h
   src/internal/QmitkAwesomePerspective.h
 )
 
