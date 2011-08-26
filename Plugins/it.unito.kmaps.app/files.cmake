@@ -4,11 +4,11 @@ SET(SRC_CPP_FILES
   KMapsWorkbenchWindowAdvisor.cpp
   KMapsFileOpenAction.cpp
   KMapsFileSaveProjectAction.cpp
-  KMapsPerspective.cpp
 )
 
 SET(INTERNAL_CPP_FILES
   KMapsApplicationPlugin.cpp
+  KMapsPerspective.cpp
 )
 
 SET(MOC_H_FILES
@@ -17,7 +17,7 @@ SET(MOC_H_FILES
   src/internal/KMapsWorkbenchWindowAdvisorHack.h
   src/KMapsFileOpenAction.h
   src/KMapsFileSaveProjectAction.h
-  src/KMapsPerspective.h
+  src/internal/KMapsPerspective.h
 )
 
 SET(CACHED_RESOURCE_FILES

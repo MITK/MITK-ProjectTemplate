@@ -10,9 +10,9 @@
 
   <extension point="org.blueberry.ui.perspectives">
     <perspective id="it.unito.kmaps.KMapsPerspective"
-      name="DCE-MRI Analysis"
+      name="KMaps Perspective"
       class="KMapsPerspective"
-      icon="resources/dce-icon.png" />
+      icon="resources/icon_research.xpm" />
   </extension>
 
 </plugin>

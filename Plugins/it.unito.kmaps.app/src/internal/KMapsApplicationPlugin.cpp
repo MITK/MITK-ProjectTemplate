@@ -17,7 +17,7 @@
 
 #include "KMapsApplicationPlugin.h"
 #include "../KMapsApplication.h"
-#include "../KMapsPerspective.h"
+#include "KMapsPerspective.h"
 
 #include <mitkVersion.h>
 #include <berryQtAssistantUtil.h>

@@ -33,7 +33,7 @@ class KMAPS_APP_EXPORT KMapsWorkbenchAdvisor: public berry::QtWorkbenchAdvisor
 {
 public:
 
-  static const std::string DEFAULT_PERSPECTIVE_ID; // = "it.unito.kmaps.app.defaultperspective"
+  static const std::string DEFAULT_PERSPECTIVE_ID; // = "it.unito.kmaps.KMapsPerspective"
 
   void Initialize(berry::IWorkbenchConfigurer::Pointer configurer);
 
