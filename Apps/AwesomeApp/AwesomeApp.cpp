@@ -39,6 +39,10 @@ int main(int argc, char** argv)
 
   Poco::Util::MapConfiguration* sbConfig(new Poco::Util::MapConfiguration());
   sbConfig->setString(berry::Platform::ARG_PROVISIONING, provFile.toString());
-  sbConfig->setString(berry::Platform::ARG_APPLICATION, "org.mitk.qt.extapplication");
+  // -------------------------------------------------------------------
+  // Here you can switch back to the original ExtApp application:
+  // -------------------------------------------------------------------
+//  sbConfig->setString(berry::Platform::ARG_APPLICATION, "org.mitk.qt.extapplication");
+  sbConfig->setString(berry::Platform::ARG_APPLICATION, "my.awesomeproject.exampleapp");
   return berry::Starter::Run(argc, argv, sbConfig);
 }
