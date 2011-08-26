@@ -1,7 +1,7 @@
 /**
-\bundlemainpage{it.unito.kmaps.app} The KMaps Application
+\bundlemainpage{my.awesomeproject.exampleapp} The MITK Ext Application
 
-Welcome to the KMaps Application, built with the <B>M</B>edical <B>I</B>maging <B>T</B>ool<B>k</B>it ( http://mitk.org/ ). 
+Welcome to the MITK Ext Application, built with the <B>M</B>edical <B>I</B>maging <B>T</B>ool<B>k</B>it ( http://mitk.org/ ). 
 
 Available sections:
   - \ref QmitkExtApplicationUserManualOverview

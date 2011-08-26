@@ -15,37 +15,37 @@ PURPOSE.  See the above copyright notices for more information.
  
 =========================================================================*/
 
-#include "KMapsApplication.h"
+#include "QmitkAwesomeApplication.h"
 
 #include <berryPlatformUI.h>
 
-#include "KMapsWorkbenchAdvisor.h"
+#include "QmitkAwesomeWorkbenchAdvisor.h"
 
 #include <QDebug>
 
-KMapsApplication::KMapsApplication()
+QmitkAwesomeApplication::QmitkAwesomeApplication()
 {
 }
 
-KMapsApplication::KMapsApplication(const KMapsApplication& other)
+QmitkAwesomeApplication::QmitkAwesomeApplication(const QmitkAwesomeApplication& other)
 : QObject(other.parent())
 {
   Q_UNUSED(other)
   throw std::runtime_error("Copy constructor not implemented");
 }
 
-int KMapsApplication::Start()
+int QmitkAwesomeApplication::Start()
 {
   berry::Display* display = berry::PlatformUI::CreateDisplay();
 
-  int code = berry::PlatformUI::CreateAndRunWorkbench(display, new KMapsWorkbenchAdvisor());
+  int code = berry::PlatformUI::CreateAndRunWorkbench(display, new QmitkAwesomeWorkbenchAdvisor());
   
   // exit the application with an appropriate return code
   return code == berry::PlatformUI::RETURN_RESTART
               ? EXIT_RESTART : EXIT_OK;
 }
 
-void KMapsApplication::Stop()
+void QmitkAwesomeApplication::Stop()
 {
   
 }

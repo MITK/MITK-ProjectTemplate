@@ -2,8 +2,8 @@
 
 Program:   Medical Imaging & Interaction Toolkit
 Language:  C++
-Date:      $Date: 2010-01-16 19:57:43 +0100 (Sa, 16 Jan 2010) $
-Version:   $Revision: 21070 $
+Date:      $Date: 2009-10-09 16:36:23 +0200 (Fr, 09 Okt 2009) $
+Version:   $Revision: 19414 $
 
 Copyright (c) German Cancer Research Center, Division of Medical and
 Biological Informatics. All rights reserved.
@@ -15,8 +15,8 @@ PURPOSE.  See the above copyright notices for more information.
 
 =========================================================================*/
 
-#ifndef KMAPSFILEOPENACTION_H_
-#define KMAPSFILEOPENACTION_H_
+#ifndef QmitkAwesomeFileSaveProjectAction_H_
+#define QmitkAwesomeFileSaveProjectAction_H_
 
 #ifdef __MINGW32__
 // We need to inlclude winbase.h here in order to declare
@@ -26,30 +26,29 @@ PURPOSE.  See the above copyright notices for more information.
 #endif
 
 #include <QAction>
-#include <QIcon>
 
-#include <it_unito_kmaps_app_Export.h>
+#include <my_awesomeproject_exampleapp_Export.h>
 
 #include <berryIWorkbenchWindow.h>
 #include <berryIPreferences.h>
 
-class KMAPS_APP_EXPORT KMapsFileOpenAction : public QAction
+class AWESOME_APP_EXPORT QmitkAwesomeFileSaveProjectAction : public QAction
 {
   Q_OBJECT
 
 public:
-  KMapsFileOpenAction(berry::IWorkbenchWindow::Pointer window);
-  KMapsFileOpenAction(const QIcon & icon, berry::IWorkbenchWindow::Pointer window);
+
+  QmitkAwesomeFileSaveProjectAction(berry::IWorkbenchWindow::Pointer window);
 
 protected slots:
 
   void Run();
 
 private:
-  void init ( berry::IWorkbenchWindow::Pointer window );
+
   berry::IWorkbenchWindow::Pointer m_Window;
   berry::IPreferences::WeakPtr m_GeneralPreferencesNode;
 };
 
 
-#endif /*KMAPSFILEOPENACTION_H_*/
+#endif /*QmitkAwesomeFileSaveProjectAction_H_*/

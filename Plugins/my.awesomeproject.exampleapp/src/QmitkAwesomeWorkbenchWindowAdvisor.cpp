@@ -15,7 +15,7 @@ PURPOSE.  See the above copyright notices for more information.
 
 =========================================================================*/
 
-#include "KMapsWorkbenchWindowAdvisor.h"
+#include "QmitkAwesomeWorkbenchWindowAdvisor.h"
 #include "QmitkExtActionBarAdvisor.h"
 
 #include <QMenu>
@@ -41,8 +41,8 @@ PURPOSE.  See the above copyright notices for more information.
 #include <internal/berryQtShowViewAction.h>
 #include <internal/berryQtOpenPerspectiveAction.h>
 
-#include <KMapsFileOpenAction.h>
-#include <KMapsFileSaveProjectAction.h>
+#include <QmitkAwesomeFileOpenAction.h>
+#include <QmitkAwesomeFileSaveProjectAction.h>
 #include <QmitkFileExitAction.h>
 #include <QmitkCloseProjectAction.h>
 #include <QmitkStatusBar.h>
@@ -55,8 +55,8 @@ PURPOSE.  See the above copyright notices for more information.
 #include <mitkVersion.h>
 
 // UGLYYY
-#include "internal/KMapsWorkbenchWindowAdvisorHack.h"
-#include "internal/KMapsApplicationPlugin.h"
+#include "internal/QmitkAwesomeWorkbenchWindowAdvisorHack.h"
+#include "internal/mitkExampleAppPluginActivator.h"
 #include "mitkUndoController.h"
 #include "mitkVerboseLimitedLinearUndo.h"
 #include <QToolBar>
@@ -64,17 +64,17 @@ PURPOSE.  See the above copyright notices for more information.
 #include <QLabel>
 #include <QmitkAboutDialog/QmitkAboutDialog.h>
 
-KMapsWorkbenchWindowAdvisorHack
-* KMapsWorkbenchWindowAdvisorHack::undohack =
-new KMapsWorkbenchWindowAdvisorHack();
+QmitkAwesomeWorkbenchWindowAdvisorHack
+* QmitkAwesomeWorkbenchWindowAdvisorHack::undohack =
+new QmitkAwesomeWorkbenchWindowAdvisorHack();
 
-QString KMapsWorkbenchWindowAdvisor::QT_SETTINGS_FILENAME = "QtSettings.ini";
+QString QmitkAwesomeWorkbenchWindowAdvisor::QT_SETTINGS_FILENAME = "QtSettings.ini";
 
 class PartListenerForTitle: public berry::IPartListener
 {
 public:
 
- PartListenerForTitle(KMapsWorkbenchWindowAdvisor* wa) :
+ PartListenerForTitle(QmitkAwesomeWorkbenchWindowAdvisor* wa) :
    windowAdvisor(wa)
    {
    }
@@ -125,7 +125,7 @@ public:
    }
 
 private:
- KMapsWorkbenchWindowAdvisor* windowAdvisor;
+ QmitkAwesomeWorkbenchWindowAdvisor* windowAdvisor;
 
 };
 
@@ -185,7 +185,7 @@ class PerspectiveListenerForTitle: public berry::IPerspectiveListener
 {
 public:
 
- PerspectiveListenerForTitle(KMapsWorkbenchWindowAdvisor* wa) :
+ PerspectiveListenerForTitle(QmitkAwesomeWorkbenchWindowAdvisor* wa) :
    windowAdvisor(wa), perspectivesClosed(false)
    {
    }
@@ -271,7 +271,7 @@ public:
    }
 
 private:
- KMapsWorkbenchWindowAdvisor* windowAdvisor;
+ QmitkAwesomeWorkbenchWindowAdvisor* windowAdvisor;
  bool perspectivesClosed;
 };
 
@@ -279,7 +279,7 @@ class PerspectiveListenerForMenu: public berry::IPerspectiveListener
 {
 public:
 
- PerspectiveListenerForMenu(KMapsWorkbenchWindowAdvisor* wa) :
+ PerspectiveListenerForMenu(QmitkAwesomeWorkbenchWindowAdvisor* wa) :
    windowAdvisor(wa)
    {
    }
@@ -310,12 +310,12 @@ public:
    }
 
 private:
- KMapsWorkbenchWindowAdvisor* windowAdvisor;
+ QmitkAwesomeWorkbenchWindowAdvisor* windowAdvisor;
 };
 
 
 
-KMapsWorkbenchWindowAdvisor::KMapsWorkbenchWindowAdvisor(berry::WorkbenchAdvisor* wbAdvisor,
+QmitkAwesomeWorkbenchWindowAdvisor::QmitkAwesomeWorkbenchWindowAdvisor(berry::WorkbenchAdvisor* wbAdvisor,
                   berry::IWorkbenchWindowConfigurer::Pointer configurer) :
 QmitkCommonWorkbenchWindowAdvisor(configurer),
 lastInput(0),
@@ -326,7 +326,7 @@ showVersionInfo(true)
  productName = berry::Platform::GetConfiguration().getString("application.baseName");
 }
 
-berry::ActionBarAdvisor::Pointer KMapsWorkbenchWindowAdvisor::CreateActionBarAdvisor(
+berry::ActionBarAdvisor::Pointer QmitkAwesomeWorkbenchWindowAdvisor::CreateActionBarAdvisor(
  berry::IActionBarConfigurer::Pointer configurer)
 {
  berry::ActionBarAdvisor::Pointer actionBarAdvisor(
@@ -334,7 +334,7 @@ berry::ActionBarAdvisor::Pointer KMapsWorkbenchWindowAdvisor::CreateActionBarAdv
  return actionBarAdvisor;
 }
 
-void* KMapsWorkbenchWindowAdvisor::CreateEmptyWindowContents(void* parent)
+void* QmitkAwesomeWorkbenchWindowAdvisor::CreateEmptyWindowContents(void* parent)
 {
  QWidget* parentWidget = static_cast<QWidget*>(parent);
  QLabel* label = new QLabel(parentWidget);
@@ -346,27 +346,27 @@ void* KMapsWorkbenchWindowAdvisor::CreateEmptyWindowContents(void* parent)
  return label;
 }
 
-void KMapsWorkbenchWindowAdvisor::ShowViewToolbar(bool show)
+void QmitkAwesomeWorkbenchWindowAdvisor::ShowViewToolbar(bool show)
 {
  showViewToolbar = show;
 }
 
-void KMapsWorkbenchWindowAdvisor::ShowVersionInfo(bool show)
+void QmitkAwesomeWorkbenchWindowAdvisor::ShowVersionInfo(bool show)
 {
  showVersionInfo = show;
 }
 
-void KMapsWorkbenchWindowAdvisor::SetProductName(const std::string& product)
+void QmitkAwesomeWorkbenchWindowAdvisor::SetProductName(const std::string& product)
 {
  productName = product;
 }
 
-void KMapsWorkbenchWindowAdvisor::SetWindowIcon(const std::string& wndIcon)
+void QmitkAwesomeWorkbenchWindowAdvisor::SetWindowIcon(const std::string& wndIcon)
 {
  windowIcon = wndIcon;
 }
 
-void KMapsWorkbenchWindowAdvisor::PostWindowCreate()
+void QmitkAwesomeWorkbenchWindowAdvisor::PostWindowCreate()
 {
  QmitkCommonWorkbenchWindowAdvisor::PostWindowCreate();
  // very bad hack...
@@ -395,9 +395,9 @@ void KMapsWorkbenchWindowAdvisor::PostWindowCreate()
  QMenu* fileMenu = menuBar->addMenu("&File");
  fileMenu->setObjectName("FileMenu");
 
- QAction* fileOpenAction = new KMapsFileOpenAction(QIcon(":/org.mitk.gui.qt.ext/Load_48.png"), window);
+ QAction* fileOpenAction = new QmitkAwesomeFileOpenAction(QIcon(":/org.mitk.gui.qt.ext/Load_48.png"), window);
  fileMenu->addAction(fileOpenAction);
- fileSaveProjectAction = new KMapsFileSaveProjectAction(window);
+ fileSaveProjectAction = new QmitkAwesomeFileSaveProjectAction(window);
  fileSaveProjectAction->setIcon(QIcon(":/org.mitk.gui.qt.ext/Save_48.png"));
  fileMenu->addAction(fileSaveProjectAction);
  closeProjectAction = new QmitkCloseProjectAction(window);
@@ -417,12 +417,12 @@ void KMapsWorkbenchWindowAdvisor::PostWindowCreate()
  QMenu* editMenu = menuBar->addMenu("&Edit");
  undoAction = editMenu->addAction(QIcon(":/org.mitk.gui.qt.ext/Undo_48.png"),
   "&Undo",
-  KMapsWorkbenchWindowAdvisorHack::undohack, SLOT(onUndo()),
+  QmitkAwesomeWorkbenchWindowAdvisorHack::undohack, SLOT(onUndo()),
   QKeySequence("CTRL+Z"));
  undoAction->setToolTip("Undo the last action (not supported by all modules)");
  redoAction = editMenu->addAction(QIcon(":/org.mitk.gui.qt.ext/Redo_48.png")
   , "&Redo",
-  KMapsWorkbenchWindowAdvisorHack::undohack, SLOT(onRedo()),
+  QmitkAwesomeWorkbenchWindowAdvisorHack::undohack, SLOT(onRedo()),
   QKeySequence("CTRL+Y"));
  redoAction->setToolTip("execute the last action that was undone again (not supported by all modules)");
 
@@ -430,7 +430,7 @@ void KMapsWorkbenchWindowAdvisor::PostWindowCreate()
  bool imageNavigatorViewFound = window->GetWorkbench()->GetViewRegistry()->Find("org.mitk.views.imagenavigator");
  if (imageNavigatorViewFound)
  {
-   QObject::connect(imageNavigatorAction, SIGNAL(triggered(bool)), KMapsWorkbenchWindowAdvisorHack::undohack, SLOT(onImageNavigator()));
+   QObject::connect(imageNavigatorAction, SIGNAL(triggered(bool)), QmitkAwesomeWorkbenchWindowAdvisorHack::undohack, SLOT(onImageNavigator()));
    imageNavigatorAction->setCheckable(true);
 
    // add part listener for image navigator
@@ -475,19 +475,19 @@ void KMapsWorkbenchWindowAdvisor::PostWindowCreate()
  // ==== Window Menu ==========================
  QMenu* windowMenu = menuBar->addMenu("Window");
  windowMenu->addAction("&New Window",
-  KMapsWorkbenchWindowAdvisorHack::undohack, SLOT(onNewWindow()));
+  QmitkAwesomeWorkbenchWindowAdvisorHack::undohack, SLOT(onNewWindow()));
  windowMenu->addSeparator();
  QMenu* perspMenu = windowMenu->addMenu("&Open Perspective");
  QMenu* viewMenu = windowMenu->addMenu("Show &View");
  viewMenu->setObjectName("Show View");
  windowMenu->addSeparator();
  resetPerspAction = windowMenu->addAction("&Reset Perspective",
-  KMapsWorkbenchWindowAdvisorHack::undohack, SLOT(onResetPerspective()));
+  QmitkAwesomeWorkbenchWindowAdvisorHack::undohack, SLOT(onResetPerspective()));
  closePerspAction = windowMenu->addAction("&Close Perspective",
-  KMapsWorkbenchWindowAdvisorHack::undohack, SLOT(onClosePerspective()));
+  QmitkAwesomeWorkbenchWindowAdvisorHack::undohack, SLOT(onClosePerspective()));
  windowMenu->addSeparator();
  windowMenu->addAction("&Preferences...",
-  KMapsWorkbenchWindowAdvisorHack::undohack, SLOT(onEditPreferences()),
+  QmitkAwesomeWorkbenchWindowAdvisorHack::undohack, SLOT(onEditPreferences()),
   QKeySequence("CTRL+P"));
 
  // fill perspective menu
@@ -598,9 +598,9 @@ void KMapsWorkbenchWindowAdvisor::PostWindowCreate()
 
  // ===== Help menu ====================================
  QMenu* helpMenu = menuBar->addMenu("Help");
- helpMenu->addAction("&Welcome",KMapsWorkbenchWindowAdvisorHack::undohack, SLOT(onIntro()));
-  helpMenu->addAction("&Help Contents",KMapsWorkbenchWindowAdvisorHack::undohack, SLOT(onHelp()),  QKeySequence("F1"));
- helpMenu->addAction("&About",KMapsWorkbenchWindowAdvisorHack::undohack, SLOT(onAbout()));
+ helpMenu->addAction("&Welcome",QmitkAwesomeWorkbenchWindowAdvisorHack::undohack, SLOT(onIntro()));
+  helpMenu->addAction("&Help Contents",QmitkAwesomeWorkbenchWindowAdvisorHack::undohack, SLOT(onHelp()),  QKeySequence("F1"));
+ helpMenu->addAction("&About",QmitkAwesomeWorkbenchWindowAdvisorHack::undohack, SLOT(onAbout()));
  // =====================================================
 
 
@@ -627,7 +627,7 @@ void KMapsWorkbenchWindowAdvisor::PostWindowCreate()
  qStatusBar->addPermanentWidget(memoryIndicator, 0);
 }
 
-void KMapsWorkbenchWindowAdvisor::PreWindowOpen()
+void QmitkAwesomeWorkbenchWindowAdvisor::PreWindowOpen()
 {
  berry::IWorkbenchWindowConfigurer::Pointer configurer = GetWindowConfigurer();
 
@@ -656,17 +656,17 @@ void KMapsWorkbenchWindowAdvisor::PreWindowOpen()
 // and undo buttons are done.
 //--------------------------------------------------------------------------------
 
-KMapsWorkbenchWindowAdvisorHack::KMapsWorkbenchWindowAdvisorHack() : QObject()
+QmitkAwesomeWorkbenchWindowAdvisorHack::QmitkAwesomeWorkbenchWindowAdvisorHack() : QObject()
 {
 
 }
 
-KMapsWorkbenchWindowAdvisorHack::~KMapsWorkbenchWindowAdvisorHack()
+QmitkAwesomeWorkbenchWindowAdvisorHack::~QmitkAwesomeWorkbenchWindowAdvisorHack()
 {
 
 }
 
-void KMapsWorkbenchWindowAdvisorHack::onUndo()
+void QmitkAwesomeWorkbenchWindowAdvisorHack::onUndo()
 {
  mitk::UndoModel* model = mitk::UndoController::GetCurrentUndoModel();
  if (model)
@@ -688,7 +688,7 @@ void KMapsWorkbenchWindowAdvisorHack::onUndo()
  }
 }
 
-void KMapsWorkbenchWindowAdvisorHack::onRedo()
+void QmitkAwesomeWorkbenchWindowAdvisorHack::onRedo()
 {
  mitk::UndoModel* model = mitk::UndoController::GetCurrentUndoModel();
  if (model)
@@ -710,7 +710,7 @@ void KMapsWorkbenchWindowAdvisorHack::onRedo()
  }
 }
 
-void KMapsWorkbenchWindowAdvisorHack::onImageNavigator()
+void QmitkAwesomeWorkbenchWindowAdvisorHack::onImageNavigator()
 {
  // get ImageNavigatorView
  berry::IViewPart::Pointer imageNavigatorView =
@@ -728,23 +728,23 @@ void KMapsWorkbenchWindowAdvisorHack::onImageNavigator()
  //berry::PlatformUI::GetWorkbench()->GetActiveWorkbenchWindow()->GetActivePage()->ResetPerspective();
 }
 
-void KMapsWorkbenchWindowAdvisorHack::onEditPreferences()
+void QmitkAwesomeWorkbenchWindowAdvisorHack::onEditPreferences()
 {
  QmitkPreferencesDialog _PreferencesDialog(QApplication::activeWindow());
  _PreferencesDialog.exec();
 }
 
-void KMapsWorkbenchWindowAdvisorHack::onQuit()
+void QmitkAwesomeWorkbenchWindowAdvisorHack::onQuit()
 {
  berry::PlatformUI::GetWorkbench()->Close();
 }
 
-void KMapsWorkbenchWindowAdvisorHack::onResetPerspective()
+void QmitkAwesomeWorkbenchWindowAdvisorHack::onResetPerspective()
 {
  berry::PlatformUI::GetWorkbench()->GetActiveWorkbenchWindow()->GetActivePage()->ResetPerspective();
 }
 
-void KMapsWorkbenchWindowAdvisorHack::onClosePerspective()
+void QmitkAwesomeWorkbenchWindowAdvisorHack::onClosePerspective()
 {
  berry::IWorkbenchPage::Pointer
   page =
@@ -752,12 +752,12 @@ void KMapsWorkbenchWindowAdvisorHack::onClosePerspective()
  page->ClosePerspective(page->GetPerspective(), true, true);
 }
 
-void KMapsWorkbenchWindowAdvisorHack::onNewWindow()
+void QmitkAwesomeWorkbenchWindowAdvisorHack::onNewWindow()
 {
  berry::PlatformUI::GetWorkbench()->OpenWorkbenchWindow(0);
 }
 
-void KMapsWorkbenchWindowAdvisorHack::onIntro()
+void QmitkAwesomeWorkbenchWindowAdvisorHack::onIntro()
 {
  bool hasIntro =
   berry::PlatformUI::GetWorkbench()->GetIntroManager()->HasIntro();
@@ -790,26 +790,26 @@ void KMapsWorkbenchWindowAdvisorHack::onIntro()
  }
 }
 
-void KMapsWorkbenchWindowAdvisorHack::onHelp()
+void QmitkAwesomeWorkbenchWindowAdvisorHack::onHelp()
 {
  berry::QtAssistantUtil::OpenActivePartHelp();
 }
 
-void KMapsWorkbenchWindowAdvisorHack::onAbout()
+void QmitkAwesomeWorkbenchWindowAdvisorHack::onAbout()
 {
  QmitkAboutDialog* aboutDialog = new QmitkAboutDialog(QApplication::activeWindow(),NULL);
  aboutDialog->open();
 }
 
-void KMapsWorkbenchWindowAdvisor::HookTitleUpdateListeners(
+void QmitkAwesomeWorkbenchWindowAdvisor::HookTitleUpdateListeners(
  berry::IWorkbenchWindowConfigurer::Pointer configurer)
 {
  // hook up the listeners to update the window title
  titlePartListener = new PartListenerForTitle(this);
  titlePerspectiveListener = new PerspectiveListenerForTitle(this);
  editorPropertyListener = new berry::PropertyChangeIntAdapter<
-  KMapsWorkbenchWindowAdvisor>(this,
-  &KMapsWorkbenchWindowAdvisor::PropertyChange);
+  QmitkAwesomeWorkbenchWindowAdvisor>(this,
+  &QmitkAwesomeWorkbenchWindowAdvisor::PropertyChange);
 
  //    configurer.getWindow().addPageListener(new IPageListener() {
  //      public void pageActivated(IWorkbenchPage page) {
@@ -829,7 +829,7 @@ void KMapsWorkbenchWindowAdvisor::HookTitleUpdateListeners(
  configurer->GetWindow()->GetPartService()->AddPartListener(titlePartListener);
 }
 
-std::string KMapsWorkbenchWindowAdvisor::ComputeTitle()
+std::string QmitkAwesomeWorkbenchWindowAdvisor::ComputeTitle()
 {
  berry::IWorkbenchWindowConfigurer::Pointer configurer =
   GetWindowConfigurer();
@@ -895,7 +895,7 @@ std::string KMapsWorkbenchWindowAdvisor::ComputeTitle()
  return title;
 }
 
-void KMapsWorkbenchWindowAdvisor::RecomputeTitle()
+void QmitkAwesomeWorkbenchWindowAdvisor::RecomputeTitle()
 {
  berry::IWorkbenchWindowConfigurer::Pointer configurer =
   GetWindowConfigurer();
@@ -907,7 +907,7 @@ void KMapsWorkbenchWindowAdvisor::RecomputeTitle()
  }
 }
 
-void KMapsWorkbenchWindowAdvisor::UpdateTitle(bool editorHidden)
+void QmitkAwesomeWorkbenchWindowAdvisor::UpdateTitle(bool editorHidden)
 {
  berry::IWorkbenchWindowConfigurer::Pointer configurer =
   GetWindowConfigurer();
@@ -954,7 +954,7 @@ void KMapsWorkbenchWindowAdvisor::UpdateTitle(bool editorHidden)
  RecomputeTitle();
 }
 
-void KMapsWorkbenchWindowAdvisor::PropertyChange(berry::Object::Pointer /*source*/, int propId)
+void QmitkAwesomeWorkbenchWindowAdvisor::PropertyChange(berry::Object::Pointer /*source*/, int propId)
 {
  if (propId == berry::IWorkbenchPartConstants::PROP_TITLE)
  {
@@ -970,27 +970,27 @@ void KMapsWorkbenchWindowAdvisor::PropertyChange(berry::Object::Pointer /*source
 }
 
 
-void KMapsWorkbenchWindowAdvisor::SetPerspectiveExcludeList(std::vector<std::string> v)
+void QmitkAwesomeWorkbenchWindowAdvisor::SetPerspectiveExcludeList(std::vector<std::string> v)
 {
   this->perspectiveExcludeList = v;
 }
 
-std::vector<std::string> KMapsWorkbenchWindowAdvisor::GetPerspectiveExcludeList()
+std::vector<std::string> QmitkAwesomeWorkbenchWindowAdvisor::GetPerspectiveExcludeList()
 {
   return this->perspectiveExcludeList;
 }
 
-void KMapsWorkbenchWindowAdvisor::SetViewExcludeList(std::vector<std::string> v)
+void QmitkAwesomeWorkbenchWindowAdvisor::SetViewExcludeList(std::vector<std::string> v)
 {
   this->viewExcludeList = v;
 }
 
-std::vector<std::string> KMapsWorkbenchWindowAdvisor::GetViewExcludeList()
+std::vector<std::string> QmitkAwesomeWorkbenchWindowAdvisor::GetViewExcludeList()
 {
   return this->viewExcludeList;
 }
 
-void KMapsWorkbenchWindowAdvisor::PostWindowClose()
+void QmitkAwesomeWorkbenchWindowAdvisor::PostWindowClose()
 {
   berry::IWorkbenchWindow::Pointer window = this->GetWindowConfigurer()->GetWindow();
   QMainWindow* mainWindow = static_cast<QMainWindow*> (window->GetShell()->GetControl());
@@ -999,8 +999,8 @@ void KMapsWorkbenchWindowAdvisor::PostWindowClose()
   settings.setValue("ToolbarPosition", mainWindow->saveState());
 }
 
-QString KMapsWorkbenchWindowAdvisor::GetQSettingsFile() const
+QString QmitkAwesomeWorkbenchWindowAdvisor::GetQSettingsFile() const
 {
-  QFileInfo settingsInfo = KMapsApplicationPlugin::GetDefault()->GetPluginContext()->getDataFile(QT_SETTINGS_FILENAME);
+  QFileInfo settingsInfo = mitk::ExampleAppPluginActivator::GetDefault()->GetPluginContext()->getDataFile(QT_SETTINGS_FILENAME);
   return settingsInfo.canonicalFilePath();
 }

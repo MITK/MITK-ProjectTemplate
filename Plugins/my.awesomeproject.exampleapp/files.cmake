@@ -1,23 +1,23 @@
 SET(SRC_CPP_FILES
-  KMapsApplication.cpp
-  KMapsWorkbenchAdvisor.cpp
-  KMapsWorkbenchWindowAdvisor.cpp
-  KMapsFileOpenAction.cpp
-  KMapsFileSaveProjectAction.cpp
+  QmitkAwesomeApplication.cpp
+  QmitkAwesomeWorkbenchAdvisor.cpp
+  QmitkAwesomeWorkbenchWindowAdvisor.cpp
+  QmitkAwesomeFileOpenAction.cpp
+  QmitkAwesomeFileSaveProjectAction.cpp
 )
 
 SET(INTERNAL_CPP_FILES
-  KMapsApplicationPlugin.cpp
-  KMapsPerspective.cpp
+  mitkExampleAppPluginActivator.cpp
+  QmitkAwesomePerspective.cpp
 )
 
 SET(MOC_H_FILES
-  src/KMapsApplication.h
-  src/internal/KMapsApplicationPlugin.h
-  src/internal/KMapsWorkbenchWindowAdvisorHack.h
-  src/KMapsFileOpenAction.h
-  src/KMapsFileSaveProjectAction.h
-  src/internal/KMapsPerspective.h
+  src/QmitkAwesomeApplication.h
+  src/internal/mitkExampleAppPluginActivator.h
+  src/internal/QmitkAwesomeWorkbenchWindowAdvisorHack.h
+  src/QmitkAwesomeFileOpenAction.h
+  src/QmitkAwesomeFileSaveProjectAction.h
+  src/internal/QmitkAwesomePerspective.h
 )
 
 SET(CACHED_RESOURCE_FILES
@@ -31,7 +31,7 @@ SET(CACHED_RESOURCE_FILES
 
 SET(QRC_FILES
 # uncomment the following line if you want to use Qt resources
-  resources/KMapsApplication.qrc
+  resources/AwesomeApplication.qrc
 )
 
 SET(CPP_FILES )
@@ -47,9 +47,9 @@ endforeach(file ${INTERNAL_CPP_FILES})
 #----------- Qt Help Collection Project -------------#
 
 IF (BLUEBERRY_USE_QT_HELP)
-  SET(_plugin_qhcp_input "${CMAKE_CURRENT_SOURCE_DIR}/documentation/KMapsQtHelpCollectionProject.qhcp")
-#  SET(_plugin_qhcp_output "${CMAKE_CURRENT_BINARY_DIR}/KMapsQtHelpCollection_${KMaps_REVISION_ID}.qhc")
-  SET(_plugin_qhcp_output "${CMAKE_CURRENT_BINARY_DIR}/KMapsQtHelpCollection.qhc")
+  SET(_plugin_qhcp_input "${CMAKE_CURRENT_SOURCE_DIR}/documentation/AwesomeQtHelpCollectionProject.qhcp")
+#  SET(_plugin_qhcp_output "${CMAKE_CURRENT_BINARY_DIR}/AwesomeQtHelpCollection_${Awesome_REVISION_ID}.qhc")
+  SET(_plugin_qhcp_output "${CMAKE_CURRENT_BINARY_DIR}/AwesomeQtHelpCollection.qhc")
   ADD_CUSTOM_COMMAND(OUTPUT ${_plugin_qhcp_output}
                      COMMAND ${QT_COLLECTIONGENERATOR_EXECUTABLE} ${_plugin_qhcp_input} -o ${_plugin_qhcp_output}
                      DEPENDS ${_plugin_qhcp_input}

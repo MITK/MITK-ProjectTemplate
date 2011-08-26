@@ -16,23 +16,23 @@
  =========================================================================*/
 
 
-#ifndef KMAPSPERSPECTIVE_H_
-#define KMAPSPERSPECTIVE_H_
+#ifndef QMITKAWESOMEPERSPECTIVE_H_
+#define QMITKAWESOMEPERSPECTIVE_H_
 
 #include <berryIPerspectiveFactory.h>
 
-class KMapsPerspective : public QObject, public berry::IPerspectiveFactory
+class QmitkAwesomePerspective : public QObject, public berry::IPerspectiveFactory
 {
   Q_OBJECT
   Q_INTERFACES(berry::IPerspectiveFactory)
   
 public:
 
-  KMapsPerspective();
-  KMapsPerspective(const KMapsPerspective& other);
+  QmitkAwesomePerspective();
+  QmitkAwesomePerspective(const QmitkAwesomePerspective& other);
   
   void CreateInitialLayout(berry::IPageLayout::Pointer layout);
 
 };
 
-#endif /* KMAPSPERSPECTIVE_H_ */
+#endif /* QMITKAWESOMEPERSPECTIVE_H_ */

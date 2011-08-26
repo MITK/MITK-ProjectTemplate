@@ -15,7 +15,7 @@ PURPOSE.  See the above copyright notices for more information.
 
 =========================================================================*/
 
-#include "KMapsFileOpenAction.h"
+#include "QmitkAwesomeFileOpenAction.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -41,13 +41,13 @@ PURPOSE.  See the above copyright notices for more information.
 
 #include "QmitkStdMultiWidgetEditor.h"
 
-KMapsFileOpenAction::KMapsFileOpenAction(berry::IWorkbenchWindow::Pointer window)
+QmitkAwesomeFileOpenAction::QmitkAwesomeFileOpenAction(berry::IWorkbenchWindow::Pointer window)
 : QAction(0)
 {
   this->init(window);
 }
 
-KMapsFileOpenAction::KMapsFileOpenAction(const QIcon & icon, berry::IWorkbenchWindow::Pointer window)
+QmitkAwesomeFileOpenAction::QmitkAwesomeFileOpenAction(const QIcon & icon, berry::IWorkbenchWindow::Pointer window)
 : QAction(0)
 {
   this->setIcon(icon);
@@ -55,7 +55,7 @@ KMapsFileOpenAction::KMapsFileOpenAction(const QIcon & icon, berry::IWorkbenchWi
   this->init(window);
 }
 
-void KMapsFileOpenAction::init(berry::IWorkbenchWindow::Pointer window)
+void QmitkAwesomeFileOpenAction::init(berry::IWorkbenchWindow::Pointer window)
 {
   m_Window = window;
   this->setParent(static_cast<QWidget*>(m_Window->GetShell()->GetControl()));
@@ -71,7 +71,7 @@ void KMapsFileOpenAction::init(berry::IWorkbenchWindow::Pointer window)
   this->connect(this, SIGNAL(triggered(bool)), this, SLOT(Run()));
 }
 
-void KMapsFileOpenAction::Run()
+void QmitkAwesomeFileOpenAction::Run()
 {
   /**
   * @brief stores the last path of last opened file

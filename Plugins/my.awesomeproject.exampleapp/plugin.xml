@@ -3,15 +3,15 @@
 <plugin>
 
   <extension point="org.blueberry.osgi.applications">
-    <application id="it.unito.kmaps.app">
-      <run class="KMapsApplication"/>
+    <application id="my.awesomeproject.exampleapp">
+      <run class="QmitkAwesomeApplication"/>
     </application>
   </extension>
 
   <extension point="org.blueberry.ui.perspectives">
-    <perspective id="it.unito.kmaps.KMapsPerspective"
-      name="KMaps Perspective"
-      class="KMapsPerspective"
+    <perspective id="my.awesomeproject.AwesomePerspective"
+      name="Awesome Perspective"
+      class="QmitkAwesomePerspective"
       icon="resources/icon_research.xpm" />
   </extension>
 

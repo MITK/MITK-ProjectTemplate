@@ -15,21 +15,21 @@
 
  =========================================================================*/
 
-#include "KMapsPerspective.h"
+#include "QmitkAwesomePerspective.h"
 #include "berryIViewLayout.h"
 
-KMapsPerspective::KMapsPerspective()
+QmitkAwesomePerspective::QmitkAwesomePerspective()
 {
 }
  
-KMapsPerspective::KMapsPerspective(const KMapsPerspective& other)
+QmitkAwesomePerspective::QmitkAwesomePerspective(const QmitkAwesomePerspective& other)
 : QObject()
 {
   Q_UNUSED(other)
   throw std::runtime_error("Copy constructor not implemented");
 }
 
-void KMapsPerspective::CreateInitialLayout(berry::IPageLayout::Pointer layout)
+void QmitkAwesomePerspective::CreateInitialLayout(berry::IPageLayout::Pointer layout)
 {
   std::string editorArea = layout->GetEditorArea();
 

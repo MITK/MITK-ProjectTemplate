@@ -15,18 +15,18 @@
 
  =========================================================================*/
 
-#include "KMapsWorkbenchAdvisor.h"
-#include "internal/KMapsApplicationPlugin.h"
+#include "QmitkAwesomeWorkbenchAdvisor.h"
+#include "internal/mitkExampleAppPluginActivator.h"
 
 #include <berryQtAssistantUtil.h>
 //#include <QmitkExtWorkbenchWindowAdvisor.h>
-#include "KMapsWorkbenchWindowAdvisor.h"
+#include "QmitkAwesomeWorkbenchWindowAdvisor.h"
 
-const std::string KMapsWorkbenchAdvisor::DEFAULT_PERSPECTIVE_ID =
-    "it.unito.kmaps.KMapsPerspective";
+const std::string QmitkAwesomeWorkbenchAdvisor::DEFAULT_PERSPECTIVE_ID =
+    "my.awesomeproject.AwesomePerspective";
 
 void
-KMapsWorkbenchAdvisor::Initialize(berry::IWorkbenchConfigurer::Pointer configurer)
+QmitkAwesomeWorkbenchAdvisor::Initialize(berry::IWorkbenchConfigurer::Pointer configurer)
 {
   berry::QtWorkbenchAdvisor::Initialize(configurer);
 
@@ -41,7 +41,7 @@ KMapsWorkbenchAdvisor::Initialize(berry::IWorkbenchConfigurer::Pointer configure
 }
 
 berry::WorkbenchWindowAdvisor*
-KMapsWorkbenchAdvisor::CreateWorkbenchWindowAdvisor(
+QmitkAwesomeWorkbenchAdvisor::CreateWorkbenchWindowAdvisor(
         berry::IWorkbenchWindowConfigurer::Pointer configurer)
 {
   // -------------------------------------------------------------------
@@ -50,13 +50,13 @@ KMapsWorkbenchAdvisor::CreateWorkbenchWindowAdvisor(
   // -------------------------------------------------------------------
 //  QmitkExtWorkbenchWindowAdvisor* advisor = new
 //    QmitkExtWorkbenchWindowAdvisor(this, configurer);
-  KMapsWorkbenchWindowAdvisor* advisor = new
-    KMapsWorkbenchWindowAdvisor(this, configurer);
-  advisor->SetWindowIcon(":/KMapslication/icon_research.xpm");
+  QmitkAwesomeWorkbenchWindowAdvisor* advisor = new
+    QmitkAwesomeWorkbenchWindowAdvisor(this, configurer);
+  advisor->SetWindowIcon(":/AwesomeApplication/icon_research.xpm");
   return advisor;
 }
 
-std::string KMapsWorkbenchAdvisor::GetInitialWindowPerspectiveId()
+std::string QmitkAwesomeWorkbenchAdvisor::GetInitialWindowPerspectiveId()
 {
   return DEFAULT_PERSPECTIVE_ID;
 }

@@ -15,8 +15,8 @@ PURPOSE.  See the above copyright notices for more information.
 
 =========================================================================*/
 
-#ifndef KMAPSWORKBENCHWINDOWADVISOR_H_
-#define KMAPSWORKBENCHWINDOWADVISOR_H_
+#ifndef QMITKAWESOMEWORKBENCHWINDOWADVISOR_H_
+#define QMITKAWESOMEWORKBENCHWINDOWADVISOR_H_
 
 #include <berryWorkbenchWindowAdvisor.h>
 
@@ -26,17 +26,17 @@ PURPOSE.  See the above copyright notices for more information.
 #include <berryWorkbenchAdvisor.h>
 #include <QmitkCommonWorkbenchWindowAdvisor.h>
 
-#include <it_unito_kmaps_app_Export.h>
+#include <my_awesomeproject_exampleapp_Export.h>
 
 #include <QList>
 class QAction;
 class QMenu;
 
-class KMAPS_APP_EXPORT KMapsWorkbenchWindowAdvisor : public QmitkCommonWorkbenchWindowAdvisor
+class AWESOME_APP_EXPORT QmitkAwesomeWorkbenchWindowAdvisor : public QmitkCommonWorkbenchWindowAdvisor
 {
 public:
 
-    KMapsWorkbenchWindowAdvisor(berry::WorkbenchAdvisor* wbAdvisor,
+    QmitkAwesomeWorkbenchWindowAdvisor(berry::WorkbenchAdvisor* wbAdvisor,
         berry::IWorkbenchWindowConfigurer::Pointer configurer);
 
     berry::ActionBarAdvisor::Pointer CreateActionBarAdvisor(
@@ -95,7 +95,7 @@ private:
   berry::IPerspectiveListener::Pointer menuPerspectiveListener;
   berry::IPartListener::Pointer imageNavigatorPartListener;
   berry::IPropertyChangeListener::Pointer editorPropertyListener;
-  friend struct berry::PropertyChangeIntAdapter<KMapsWorkbenchWindowAdvisor>;
+  friend struct berry::PropertyChangeIntAdapter<QmitkAwesomeWorkbenchWindowAdvisor>;
   friend class PartListenerForTitle;
   friend class PerspectiveListenerForTitle;
   friend class PerspectiveListenerForMenu;
@@ -133,4 +133,4 @@ private:
   QAction* closePerspAction;
 };
 
-#endif /*KMAPSWORKBENCHWINDOWADVISOR_H_*/
+#endif /*QMITKAWESOMEWORKBENCHWINDOWADVISOR_H_*/

@@ -15,8 +15,8 @@
 
  =========================================================================*/
 
-#ifndef KMAPSAPPWORKBENCHADVISOR_H_
-#define KMAPSAPPWORKBENCHADVISOR_H_
+#ifndef QMITKAWESOMEWORKBENCHADVISOR_H_
+#define QMITKAWESOMEWORKBENCHADVISOR_H_
 
 #ifdef __MINGW32__
 // We need to inlclude winbase.h here in order to declare
@@ -27,13 +27,13 @@
 
 #include <berryQtWorkbenchAdvisor.h>
 
-#include "it_unito_kmaps_app_Export.h"
+#include "my_awesomeproject_exampleapp_Export.h"
 
-class KMAPS_APP_EXPORT KMapsWorkbenchAdvisor: public berry::QtWorkbenchAdvisor
+class AWESOME_APP_EXPORT QmitkAwesomeWorkbenchAdvisor: public berry::QtWorkbenchAdvisor
 {
 public:
 
-  static const std::string DEFAULT_PERSPECTIVE_ID; // = "it.unito.kmaps.KMapsPerspective"
+  static const std::string DEFAULT_PERSPECTIVE_ID; // = "my.awesomeproject.AwesomePerspective"
 
   void Initialize(berry::IWorkbenchConfigurer::Pointer configurer);
 
@@ -44,4 +44,4 @@ public:
 
 };
 
-#endif /*KMAPSAPPWORKBENCHADVISOR_H_*/
+#endif /*QMITKAWESOMEWORKBENCHADVISOR_H_*/

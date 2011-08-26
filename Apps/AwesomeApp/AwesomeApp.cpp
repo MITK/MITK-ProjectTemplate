@@ -43,6 +43,6 @@ int main(int argc, char** argv)
   // Here you can switch back to the original ExtApp application:
   // -------------------------------------------------------------------
 //  sbConfig->setString(berry::Platform::ARG_APPLICATION, "org.mitk.qt.extapplication");
-  sbConfig->setString(berry::Platform::ARG_APPLICATION, "it.unito.kmaps.app");
+  sbConfig->setString(berry::Platform::ARG_APPLICATION, "my.awesomeproject.exampleapp");
   return berry::Starter::Run(argc, argv, sbConfig);
 }

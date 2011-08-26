@@ -19,7 +19,7 @@ PURPOSE.  See the above copyright notices for more information.
 
 class QmitkPreferencesDialog;
 
-class KMapsWorkbenchWindowAdvisorHack : public QObject
+class QmitkAwesomeWorkbenchWindowAdvisorHack : public QObject
 {
   Q_OBJECT
 
@@ -48,9 +48,9 @@ class KMapsWorkbenchWindowAdvisorHack : public QObject
 
   public:
 
-    KMapsWorkbenchWindowAdvisorHack();
-    ~KMapsWorkbenchWindowAdvisorHack();
+    QmitkAwesomeWorkbenchWindowAdvisorHack();
+    ~QmitkAwesomeWorkbenchWindowAdvisorHack();
 
-    static KMapsWorkbenchWindowAdvisorHack* undohack;
+    static QmitkAwesomeWorkbenchWindowAdvisorHack* undohack;
     
 };

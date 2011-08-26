@@ -15,9 +15,9 @@
  
  =========================================================================*/
 
-#include "KMapsApplicationPlugin.h"
-#include "../KMapsApplication.h"
-#include "KMapsPerspective.h"
+#include "mitkExampleAppPluginActivator.h"
+#include "../QmitkAwesomeApplication.h"
+#include "QmitkAwesomePerspective.h"
 
 #include <mitkVersion.h>
 #include <berryQtAssistantUtil.h>
@@ -26,37 +26,39 @@
 #include <QDateTime>
 #include <QtPlugin>
 
-KMapsApplicationPlugin* KMapsApplicationPlugin::inst = 0;
+namespace mitk {
 
-KMapsApplicationPlugin::KMapsApplicationPlugin()
+ExampleAppPluginActivator* ExampleAppPluginActivator::inst = 0;
+
+ExampleAppPluginActivator::ExampleAppPluginActivator()
   : pluginListener(0)
 {
   inst = this;
 }
 
-KMapsApplicationPlugin::~KMapsApplicationPlugin()
+ExampleAppPluginActivator::~ExampleAppPluginActivator()
 {
   delete pluginListener;
 }
 
-KMapsApplicationPlugin* KMapsApplicationPlugin::GetDefault()
+ExampleAppPluginActivator* ExampleAppPluginActivator::GetDefault()
 {
   return inst;
 }
 
-void KMapsApplicationPlugin::start(ctkPluginContext* context)
+void ExampleAppPluginActivator::start(ctkPluginContext* context)
 {
   berry::AbstractUICTKPlugin::start(context);
   
   this->context = context;
   
-  BERRY_REGISTER_EXTENSION_CLASS(KMapsApplication, context);
-  BERRY_REGISTER_EXTENSION_CLASS(KMapsPerspective, context);
+  BERRY_REGISTER_EXTENSION_CLASS(QmitkAwesomeApplication, context);
+  BERRY_REGISTER_EXTENSION_CLASS(QmitkAwesomePerspective, context);
 
   QString collectionFile = GetQtHelpCollectionFile();
 
   berry::QtAssistantUtil::SetHelpCollectionFile(collectionFile);
-  berry::QtAssistantUtil::SetDefaultHelpUrl("qthelp://it.unito.kmaps.app/bundle/index.html");
+  berry::QtAssistantUtil::SetDefaultHelpUrl("qthelp://my.awesomeproject.exampleapp/bundle/index.html");
 
   delete pluginListener;
   pluginListener = new berry::QCHPluginListener(context);
@@ -66,12 +68,12 @@ void KMapsApplicationPlugin::start(ctkPluginContext* context)
   pluginListener->processPlugins();
 }
 
-ctkPluginContext* KMapsApplicationPlugin::GetPluginContext() const
+ctkPluginContext* ExampleAppPluginActivator::GetPluginContext() const
 {
   return context;
 }
 
-QString KMapsApplicationPlugin::GetQtHelpCollectionFile() const
+QString ExampleAppPluginActivator::GetQtHelpCollectionFile() const
 {
   if (!helpCollectionFile.isEmpty())
   {
@@ -80,10 +82,10 @@ QString KMapsApplicationPlugin::GetQtHelpCollectionFile() const
 
   QString collectionFilename;
 //  QString na("n/a");
-//  if (na != KMaps_REVISION)
-//    collectionFilename = "KMapsQtHelpCollection_" KMaps_REVISION ".qhc";
+//  if (na != Awesome_REVISION)
+//    collectionFilename = "AwesomeQtHelpCollection_" Awesome_REVISION ".qhc";
 //  else
-    collectionFilename = "KMapsQtHelpCollection.qhc";
+    collectionFilename = "AwesomeQtHelpCollection.qhc";
 
   QFileInfo collectionFileInfo = context->getDataFile(collectionFilename);
   QFileInfo pluginFileInfo = QFileInfo(QUrl(context->getPlugin()->getLocation()).toLocalFile());
@@ -113,4 +115,6 @@ QString KMapsApplicationPlugin::GetQtHelpCollectionFile() const
   return helpCollectionFile;
 }
 
-Q_EXPORT_PLUGIN2(it_unito_kmaps_app, KMapsApplicationPlugin)
+}
+
+Q_EXPORT_PLUGIN2(my_awesomeproject_exampleapp, mitk::ExampleAppPluginActivator)

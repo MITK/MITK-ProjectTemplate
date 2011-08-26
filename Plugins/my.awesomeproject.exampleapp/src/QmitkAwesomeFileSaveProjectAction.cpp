@@ -15,7 +15,7 @@ PURPOSE.  See the above copyright notices for more information.
 
 =========================================================================*/
 
-#include "KMapsFileSaveProjectAction.h"
+#include "QmitkAwesomeFileSaveProjectAction.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -35,7 +35,7 @@ PURPOSE.  See the above copyright notices for more information.
 
 #include "QmitkStdMultiWidgetEditor.h"
 
-KMapsFileSaveProjectAction::KMapsFileSaveProjectAction(berry::IWorkbenchWindow::Pointer window)
+QmitkAwesomeFileSaveProjectAction::QmitkAwesomeFileSaveProjectAction(berry::IWorkbenchWindow::Pointer window)
 : QAction(0)
 {
   m_Window = window;
@@ -53,7 +53,7 @@ KMapsFileSaveProjectAction::KMapsFileSaveProjectAction(berry::IWorkbenchWindow::
   this->connect(this, SIGNAL(triggered(bool)), this, SLOT(Run()));
 }
 
-void KMapsFileSaveProjectAction::Run()
+void QmitkAwesomeFileSaveProjectAction::Run()
 {
   try
   {

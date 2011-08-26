@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <QHelpCollectionProject version="1.0">
      <assistant>
-         <title>KMaps Help</title>
-         <startPage>qthelp://it.unito.kmaps.app/bundle/index.html</startPage>
+         <title>My Awesome Project Help</title>
+         <startPage>qthelp://my.awesomeproject.exampleapp.app/bundle/index.html</startPage>
          <enableFilterFunctionality>true</enableFilterFunctionality>
          <enableDocumentationManager>true</enableDocumentationManager>
          <enableAddressBar visible="true">true</enableAddressBar>
-         <cacheDirectory>University of Turin, MBC</cacheDirectory>
+         <cacheDirectory>QmitkExt</cacheDirectory>
          <aboutMenuText>
-             <text>About KMaps</text>
+             <text>About My Awesome Project</text>
          </aboutMenuText>
      </assistant>
      <docFiles>

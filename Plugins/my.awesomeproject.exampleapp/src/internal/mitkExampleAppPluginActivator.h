@@ -16,8 +16,8 @@
  =========================================================================*/
 
 
-#ifndef KMAPSAPPLICATIONPLUGIN_H_
-#define KMAPSAPPLICATIONPLUGIN_H_
+#ifndef MITK_EXAMPLEAPP_PLUGIN_ACTIVATOR_H_
+#define MITK_EXAMPLEAPP_PLUGIN_ACTIVATOR_H_
 
 #include <berryAbstractUICTKPlugin.h>
 
@@ -25,17 +25,19 @@
 
 #include <berryQCHPluginListener.h>
 
-class KMapsApplicationPlugin : public QObject, public berry::AbstractUICTKPlugin
+namespace mitk {
+
+class ExampleAppPluginActivator : public QObject, public berry::AbstractUICTKPlugin
 {
   Q_OBJECT
   Q_INTERFACES(ctkPluginActivator)
   
 public:
 
-  KMapsApplicationPlugin();
-  ~KMapsApplicationPlugin();
+  ExampleAppPluginActivator();
+  ~ExampleAppPluginActivator();
 
-  static KMapsApplicationPlugin* GetDefault();
+  static ExampleAppPluginActivator* GetDefault();
 
   ctkPluginContext* GetPluginContext() const;
 
@@ -45,7 +47,7 @@ public:
 
 private:
 
-  static KMapsApplicationPlugin* inst;
+  static ExampleAppPluginActivator* inst;
 
   ctkPluginContext* context;
   berry::QCHPluginListener* pluginListener;
@@ -53,4 +55,6 @@ private:
   mutable QString helpCollectionFile;
 };
 
-#endif /* KMAPSAPPLICATIONPLUGIN_H_ */
+}
+
+#endif /* MITK_EXAMPLEAPP_PLUGIN_ACTIVATOR_H_ */

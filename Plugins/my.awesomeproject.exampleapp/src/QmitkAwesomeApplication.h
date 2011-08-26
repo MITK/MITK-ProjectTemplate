@@ -15,25 +15,25 @@ PURPOSE.  See the above copyright notices for more information.
  
 =========================================================================*/
 
-#ifndef KMAPSAPPLICATION_H_
-#define KMAPSAPPLICATION_H_
+#ifndef QMITKAWESOMEAPPLICATION_H_
+#define QMITKAWESOMEAPPLICATION_H_
 
 #include <berryIApplication.h>
 
-#include "it_unito_kmaps_app_Export.h"
+#include "my_awesomeproject_exampleapp_Export.h"
 
-class KMAPS_APP_EXPORT KMapsApplication : public QObject, public berry::IApplication
+class AWESOME_APP_EXPORT QmitkAwesomeApplication : public QObject, public berry::IApplication
 {
   Q_OBJECT
   Q_INTERFACES(berry::IApplication)
 
 public:
 
-  KMapsApplication();
-  KMapsApplication(const KMapsApplication& other);
+  QmitkAwesomeApplication();
+  QmitkAwesomeApplication(const QmitkAwesomeApplication& other);
   
   int Start();
   void Stop();
 };
 
-#endif /*KMAPSAPPLICATION_H_*/
+#endif /*QMITKAWESOMEAPPLICATION_H_*/
