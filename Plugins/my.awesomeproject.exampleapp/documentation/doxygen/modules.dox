@@ -1,0 +1,16 @@
+/**
+  \defgroup my_awesomeproject_exampleapp my.awesomeproject.exampleapp Plugin
+  \ingroup MITKPlugins
+
+  \brief This plug-in is responsible for initializing the "AwesomeApp".
+  
+*/
+
+/**
+  \defgroup my_awesomeproject_exampleapp_internal Internal
+  \ingroup my_awesomeproject_exampleapp
+
+  \brief This subcategory includes the internal classes of the my.awesomeproject.exampleapp plugin. Other
+  plugins must not rely on these classes. They contain implementation details and their interface
+  may change at any time. We mean it.
+*/
