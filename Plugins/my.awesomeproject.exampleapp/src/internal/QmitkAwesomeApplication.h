@@ -20,9 +20,7 @@ PURPOSE.  See the above copyright notices for more information.
 
 #include <berryIApplication.h>
 
-#include "my_awesomeproject_exampleapp_Export.h"
-
-class AWESOME_APP_EXPORT QmitkAwesomeApplication : public QObject, public berry::IApplication
+class QmitkAwesomeApplication : public QObject, public berry::IApplication
 {
   Q_OBJECT
   Q_INTERFACES(berry::IApplication)

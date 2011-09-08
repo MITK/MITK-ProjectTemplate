@@ -16,7 +16,7 @@
  =========================================================================*/
 
 #include "mitkExampleAppPluginActivator.h"
-#include "../QmitkAwesomeApplication.h"
+#include "QmitkAwesomeApplication.h"
 #include "QmitkAwesomePerspective.h"
 
 #include <mitkVersion.h>

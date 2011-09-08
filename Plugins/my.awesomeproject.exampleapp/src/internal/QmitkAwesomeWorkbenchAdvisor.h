@@ -27,9 +27,7 @@
 
 #include <berryQtWorkbenchAdvisor.h>
 
-#include "my_awesomeproject_exampleapp_Export.h"
-
-class AWESOME_APP_EXPORT QmitkAwesomeWorkbenchAdvisor: public berry::QtWorkbenchAdvisor
+class QmitkAwesomeWorkbenchAdvisor: public berry::QtWorkbenchAdvisor
 {
 public:
 

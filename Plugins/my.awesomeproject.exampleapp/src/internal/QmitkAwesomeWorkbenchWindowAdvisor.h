@@ -26,13 +26,11 @@ PURPOSE.  See the above copyright notices for more information.
 #include <berryWorkbenchAdvisor.h>
 #include <QmitkCommonWorkbenchWindowAdvisor.h>
 
-#include <my_awesomeproject_exampleapp_Export.h>
-
 #include <QList>
 class QAction;
 class QMenu;
 
-class AWESOME_APP_EXPORT QmitkAwesomeWorkbenchWindowAdvisor : public QmitkCommonWorkbenchWindowAdvisor
+class QmitkAwesomeWorkbenchWindowAdvisor : public QmitkCommonWorkbenchWindowAdvisor
 {
 public:
 
