@@ -1,0 +1,21 @@
+/**
+\bundlemainpage{my.awesomeproject.exampleplugin} Awesome Example Plugin
+
+\image html icon.xpm "Icon of Awesome Example Plugin"
+
+Available sections:
+  - \ref my_awesomeproject_examplepluginOverview
+
+\section my_awesomeproject_examplepluginOverview Overview
+
+Describe the features of your awesome plugin here
+
+<ul>
+  <li>Increases productivity</li>
+  <li>Creates beautiful images</li>
+  <li>Generates PhD thesis</li>
+  <li>Brings world peace</li>
+</ul>
+
+*/
+
