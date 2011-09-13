@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <QHelpCollectionProject version="1.0">
      <assistant>
-         <title>MITK Help</title>
-         <startPage>qthelp://org.mitk.gui.qt.extapplication/bundle/index.html</startPage>
+         <title>ExampleApp Help</title>
+         <startPage>qthelp://my.awesomeproject.exampleapp/bundle/index.html</startPage>
          <enableFilterFunctionality>false</enableFilterFunctionality>
          <enableDocumentationManager>false</enableDocumentationManager>
          <enableAddressBar visible="false">true</enableAddressBar>
-         <cacheDirectory>MitkExt</cacheDirectory>
+         <cacheDirectory>ExampleApp</cacheDirectory>
          <aboutMenuText>
-             <text>About MITK Help</text>
+             <text>About ExampleApp Help</text>
          </aboutMenuText>
      </assistant>
      <docFiles>

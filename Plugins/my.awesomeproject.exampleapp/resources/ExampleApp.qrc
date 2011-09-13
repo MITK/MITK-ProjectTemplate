@@ -1,6 +1,6 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-  <qresource prefix="/AwesomeApplication">
+  <qresource prefix="/ExampleApp">
     <file>icon_research.xpm</file>
   </qresource>
  </RCC>

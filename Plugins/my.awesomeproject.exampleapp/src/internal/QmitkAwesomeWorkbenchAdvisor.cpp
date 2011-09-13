@@ -52,7 +52,7 @@ QmitkAwesomeWorkbenchAdvisor::CreateWorkbenchWindowAdvisor(
 //    QmitkExtWorkbenchWindowAdvisor(this, configurer);
   QmitkAwesomeWorkbenchWindowAdvisor* advisor = new
     QmitkAwesomeWorkbenchWindowAdvisor(this, configurer);
-  advisor->SetWindowIcon(":/AwesomeApplication/icon_research.xpm");
+  advisor->SetWindowIcon(":/ExampleApp/icon_research.xpm");
   return advisor;
 }
 
