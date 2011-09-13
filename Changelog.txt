@@ -1,0 +1,8 @@
+This is the change log for the MITK-ProjectTemplate
+
+
+Changes since version 1.0.0
+======================================================================
+
+- Clean the project-specific module conf directory and add the dir
+  to the global CMake variable holding all module conf dirs.
