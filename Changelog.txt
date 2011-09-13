@@ -4,5 +4,12 @@ This is the change log for the MITK-ProjectTemplate
 Changes since version 1.0.0
 ======================================================================
 
+- Fixed user manual for the my.awesomeproject.exampleplugin plugin.
+  (contributed by Miklos Espak)
+
+- Added new plugin demonstrating how to write a custom BlueBerry
+  application plugin containing Workbench advisor classes.
+  (contributed by Miklos Espak)
+
 - Clean the project-specific module conf directory and add the dir
   to the global CMake variable holding all module conf dirs.
