@@ -4,6 +4,13 @@ This is the change log for the MITK-ProjectTemplate
 Changes since version 1.0.0
 ======================================================================
 
+- Added support for plug-in validation for applications.
+
+- Fixed broken make job server support when starting the inner
+  project build.
+
+- Small CMake cleanups
+
 - Fixed user manual for the my.awesomeproject.exampleplugin plugin.
   (contributed by Miklos Espak)
 
