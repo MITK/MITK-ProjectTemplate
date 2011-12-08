@@ -146,7 +146,7 @@ set(proj ${MY_PROJECT_NAME}-Configure)
 ExternalProject_Add(${proj}
   DOWNLOAD_COMMAND ""
   CMAKE_GENERATOR ${gen}
-  CMAKE_ARGS
+  CMAKE_CACHE_ARGS
     ${ep_common_args}
     ${my_superbuild_boolean_args}
     -D${MY_PROJECT_NAME}_USE_SUPERBUILD:BOOL=OFF
