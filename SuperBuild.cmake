@@ -110,6 +110,7 @@ set(my_cmake_boolean_args
   WITH_COVERAGE
   BUILD_TESTING
   ${MY_PROJECT_NAME}_BUILD_ALL_PLUGINS
+  ${MY_PROJECT_NAME}_BUILD_ALL_APPS
   )
     
 #-----------------------------------------------------------------------------

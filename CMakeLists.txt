@@ -91,9 +91,11 @@ option(WITH_COVERAGE "Enable/Disable coverage" OFF)
 option(BUILD_TESTING "Test the project" ON)
 
 option(${MY_PROJECT_NAME}_BUILD_ALL_PLUGINS "Build all ${MY_PROJECT_NAME} plugins" OFF)
+option(${MY_PROJECT_NAME}_BUILD_ALL_APPS "Build all ${MY_PROJECT_NAME} applications" OFF)
   
 mark_as_advanced(${MY_PROJECT_NAME}_INSTALL_RPATH_RELATIVE
                  ${MY_PROJECT_NAME}_BUILD_ALL_PLUGINS
+                 ${MY_PROJECT_NAME}_BUILD_ALL_APPS
                  )
 
 #-----------------------------------------------------------------------------
@@ -327,16 +329,24 @@ macro(GetMyTargetLibraries all_target_libraries varname)
   ctkMacroListFilter(_tmp_list re_ctkplugin OUTPUT_VARIABLE ${varname})
 endmacro()
 
+# Get infos about application directories and build options
+include("${CMAKE_CURRENT_SOURCE_DIR}/Apps/Apps.cmake")
+set(_apps_fullpath )
+foreach(_app ${PROJECT_APPS})
+  list(APPEND _apps_fullpath "${CMAKE_CURRENT_SOURCE_DIR}/${_app}")
+endforeach()
+
 include(${CMAKE_CURRENT_SOURCE_DIR}/Plugins/Plugins.cmake)
-ctkMacroSetupExternalPlugins(${PROJECT_PLUGINS}
-                             BUILD_OPTION_PREFIX ${MY_PROJECT_NAME}_
-                             BUILD_ALL ${${MY_PROJECT_NAME}_BUILD_ALL_PLUGINS})
+ctkMacroSetupPlugins(${PROJECT_PLUGINS}
+                     APPS ${_apps_fullpath}
+                     BUILD_OPTION_PREFIX ${PROJECT_NAME}_
+                     BUILD_ALL ${${PROJECT_NAME}_BUILD_ALL_PLUGINS})
 
 #-----------------------------------------------------------------------------
 # Add subdirectories
 #-----------------------------------------------------------------------------
 
-add_subdirectory(Apps/AwesomeApp)
+add_subdirectory(Apps)
 
 #-----------------------------------------------------------------------------
 # Installation
