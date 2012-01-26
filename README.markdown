@@ -20,6 +20,8 @@ Especially you should do a global search and replace for the string "awesome" to
 
 You can download a [tarball](https://github.com/MITK/MITK-ProjectTemplate/tarball/master) or [zipball](https://github.com/MITK/MITK-ProjectTemplate/zipball/master) which contains the current sources. You should only clone this repository (or fork it on github) if you want to work with the project template itself (i.e. by contributing improvements).
 
+Please read how to [Setup a MITK-base project](http://www.mitk.org/wiki/SetupAMitkBasedProject) for build instructions.
+
 Supported Platforms
 -------------------
 
