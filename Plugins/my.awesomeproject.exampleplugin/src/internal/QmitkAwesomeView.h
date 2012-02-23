@@ -20,7 +20,7 @@ PURPOSE.  See the above copyright notices for more information.
 
 #include <berryISelectionListener.h>
 
-#include <QmitkFunctionality.h>
+#include <QmitkAbstractView.h>
 
 #include "ui_QmitkAwesomeViewControls.h"
 
@@ -33,7 +33,7 @@ PURPOSE.  See the above copyright notices for more information.
   \sa QmitkFunctionality
   \ingroup Functionalities
 */
-class QmitkAwesomeView : public QmitkFunctionality
+class QmitkAwesomeView : public QmitkAbstractView
 {  
   // this is needed for all Qt objects that should have a Qt meta-object
   // (everything that derives from QObject and wants to have signal/slots)
@@ -52,8 +52,11 @@ class QmitkAwesomeView : public QmitkFunctionality
 
   protected:
 
-    /// \brief called by QmitkFunctionality when DataManager's selection has changed
-    virtual void OnSelectionChanged( std::vector<mitk::DataNode*> nodes );
+    virtual void SetFocus();
+
+    /// \brief called by QmitkAbstractView when DataManager's selection has changed
+    virtual void OnSelectionChanged( berry::IWorkbenchPart::Pointer source,
+                                     const QList<mitk::DataNode::Pointer>& nodes );
 
     Ui::QmitkAwesomeViewControls m_Controls;
 
