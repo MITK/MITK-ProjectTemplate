@@ -43,9 +43,6 @@ class QmitkAwesomeView : public QmitkFunctionality
 
     static const std::string VIEW_ID;
 
-    QmitkAwesomeView();
-    virtual ~QmitkAwesomeView();
-
     virtual void CreateQtPartControl(QWidget *parent);
 
   protected slots:

@@ -31,14 +31,6 @@ PURPOSE.  See the above copyright notices for more information.
 
 const std::string QmitkAwesomeView::VIEW_ID = "my.awesomeproject.views.awesomeview";
 
-QmitkAwesomeView::QmitkAwesomeView()
-: QmitkFunctionality()
-{
-}
-
-QmitkAwesomeView::~QmitkAwesomeView()
-{
-}
 
 void QmitkAwesomeView::CreateQtPartControl( QWidget *parent )
 {
