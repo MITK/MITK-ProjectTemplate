@@ -1,5 +1,12 @@
 This is the change log for the MITK-ProjectTemplate
 
+Changes since version 1.1.0
+======================================================================
+
+- Added gcc linker flag --as-needed to get same behavior as  on Windows
+
+- Improved MITK superbuild configuration options
+
 
 Changes since version 1.0.0
 ======================================================================
