@@ -19,8 +19,8 @@
 #include "internal/mitkExampleAppPluginActivator.h"
 
 #include <berryQtAssistantUtil.h>
-//#include <QmitkExtWorkbenchWindowAdvisor.h>
-#include "QmitkAwesomeWorkbenchWindowAdvisor.h"
+#include <QmitkExtWorkbenchWindowAdvisor.h>
+
 
 const std::string QmitkAwesomeWorkbenchAdvisor::DEFAULT_PERSPECTIVE_ID =
     "my.awesomeproject.AwesomePerspective";
@@ -31,27 +31,17 @@ QmitkAwesomeWorkbenchAdvisor::Initialize(berry::IWorkbenchConfigurer::Pointer co
   berry::QtWorkbenchAdvisor::Initialize(configurer);
 
   configurer->SetSaveAndRestore(true);
-
-  if (!berry::QtAssistantUtil::GetHelpCollectionFile().isEmpty())
-  {
-    typedef std::vector<berry::IBundle::Pointer> BundleContainer;
-    BundleContainer bundles = berry::Platform::GetBundles();
-    berry::QtAssistantUtil::RegisterQCHFiles(bundles);
-  }
 }
 
 berry::WorkbenchWindowAdvisor*
 QmitkAwesomeWorkbenchAdvisor::CreateWorkbenchWindowAdvisor(
-        berry::IWorkbenchWindowConfigurer::Pointer configurer)
+    berry::IWorkbenchWindowConfigurer::Pointer configurer)
 {
   // -------------------------------------------------------------------
-  // Here you can switch back to the original workbench window advisor:
-  // (Include the header as well!)
+  // Here you could pass your custom Workbench window advisor
   // -------------------------------------------------------------------
-//  QmitkExtWorkbenchWindowAdvisor* advisor = new
-//    QmitkExtWorkbenchWindowAdvisor(this, configurer);
-  QmitkAwesomeWorkbenchWindowAdvisor* advisor = new
-    QmitkAwesomeWorkbenchWindowAdvisor(this, configurer);
+  QmitkExtWorkbenchWindowAdvisor* advisor = new
+      QmitkExtWorkbenchWindowAdvisor(this, configurer);
   advisor->SetWindowIcon(":/ExampleApp/icon_research.xpm");
   return advisor;
 }

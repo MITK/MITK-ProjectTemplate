@@ -1,5 +1,5 @@
 /**
-  \defgroup my_awesomeproject_exampleapp my.awesomeproject.exampleapp Plugin
+  \defgroup my_awesomeproject_exampleapp my.awesomeproject.exampleapp
   \ingroup MITKPlugins
 
   \brief This plug-in is responsible for initializing the "AwesomeApp".

@@ -5,14 +5,12 @@ SET(INTERNAL_CPP_FILES
   mitkExampleAppPluginActivator.cpp
   QmitkAwesomeApplication.cpp
   QmitkAwesomeWorkbenchAdvisor.cpp
-  QmitkAwesomeWorkbenchWindowAdvisor.cpp
   QmitkAwesomePerspective.cpp
 )
 
 SET(MOC_H_FILES
   src/internal/QmitkAwesomeApplication.h
   src/internal/mitkExampleAppPluginActivator.h
-  src/internal/QmitkAwesomeWorkbenchWindowAdvisorHack.h
   src/internal/QmitkAwesomePerspective.h
 )
 
@@ -40,15 +38,3 @@ foreach(file ${INTERNAL_CPP_FILES})
   SET(CPP_FILES ${CPP_FILES} src/internal/${file})
 endforeach(file ${INTERNAL_CPP_FILES})
 
-#----------- Qt Help Collection Project -------------#
-
-IF (BLUEBERRY_USE_QT_HELP)
-  SET(_plugin_qhcp_input "${CMAKE_CURRENT_SOURCE_DIR}/documentation/ExampleAppQtHelpCollectionProject.qhcp")
-  SET(_plugin_qhcp_output "${CMAKE_CURRENT_BINARY_DIR}/ExampleAppQtHelpCollection.qhc")
-  ADD_CUSTOM_COMMAND(OUTPUT ${_plugin_qhcp_output}
-                     COMMAND ${QT_COLLECTIONGENERATOR_EXECUTABLE} ${_plugin_qhcp_input} -o ${_plugin_qhcp_output}
-                     DEPENDS ${_plugin_qhcp_input}
-                     )
-
-  LIST(APPEND CACHED_RESOURCE_FILES ${_plugin_qhcp_output})
-ENDIF()
