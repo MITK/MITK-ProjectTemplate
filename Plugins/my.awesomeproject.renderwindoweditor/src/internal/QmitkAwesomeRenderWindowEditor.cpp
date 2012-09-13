@@ -33,19 +33,19 @@ QmitkAwesomeRenderWindowEditor::QmitkAwesomeRenderWindowEditor()
 {
 }
 
-QmitkRenderWindow *QmitkAwesomeRenderWindowEditor::GetActiveRenderWindow() const
+QmitkRenderWindow *QmitkAwesomeRenderWindowEditor::GetActiveQmitkRenderWindow() const
 {
   return m_RenderWindow;
 }
 
-QHash<QString, QmitkRenderWindow *> QmitkAwesomeRenderWindowEditor::GetRenderWindows() const
+QHash<QString, QmitkRenderWindow *> QmitkAwesomeRenderWindowEditor::GetQmitkRenderWindows() const
 {
   QHash<QString, QmitkRenderWindow*> wnds;
   wnds.insert("transversal", m_RenderWindow);
   return wnds;
 }
 
-QmitkRenderWindow *QmitkAwesomeRenderWindowEditor::GetRenderWindow(const QString &id) const
+QmitkRenderWindow *QmitkAwesomeRenderWindowEditor::GetQmitkRenderWindow(const QString &id) const
 {
   if (id == "transversal")
   {
