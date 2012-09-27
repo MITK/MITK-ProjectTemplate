@@ -21,6 +21,7 @@
 #include <berryQtAssistantUtil.h>
 #include <QmitkExtWorkbenchWindowAdvisor.h>
 
+#include <mitkWorkbenchUtil.h>
 
 const std::string QmitkAwesomeWorkbenchAdvisor::DEFAULT_PERSPECTIVE_ID =
     "my.awesomeproject.AwesomePerspective";
@@ -31,6 +32,9 @@ QmitkAwesomeWorkbenchAdvisor::Initialize(berry::IWorkbenchConfigurer::Pointer co
   berry::QtWorkbenchAdvisor::Initialize(configurer);
 
   configurer->SetSaveAndRestore(true);
+
+  ctkPluginContext* context = mitk::ExampleAppPluginActivator::GetDefault()->GetPluginContext();
+  mitk::WorkbenchUtil::SetDepartmentLogoPreference(":/ExampleApp/MyLogo.png", context);
 }
 
 berry::WorkbenchWindowAdvisor*
