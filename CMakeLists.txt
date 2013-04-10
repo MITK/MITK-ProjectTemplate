@@ -13,7 +13,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build." FORCE)
 
   # Set the possible values of build type for cmake-gui
-  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY 
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY
                STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
@@ -99,15 +99,6 @@ mark_as_advanced(${MY_PROJECT_NAME}_INSTALL_RPATH_RELATIVE
                  )
 
 #-----------------------------------------------------------------------------
-# Additional CXX/C Flags
-#-----------------------------------------------------------------------------
-
-set(ADDITIONAL_C_FLAGS "" CACHE STRING "Additional C Flags")
-mark_as_advanced(ADDITIONAL_C_FLAGS)
-set(ADDITIONAL_CXX_FLAGS "" CACHE STRING "Additional CXX Flags")
-mark_as_advanced(ADDITIONAL_CXX_FLAGS)
-
-#-----------------------------------------------------------------------------
 # Superbuild script
 #-----------------------------------------------------------------------------
 
@@ -125,6 +116,13 @@ endif()
 #-----------------------------------------------------------------------------
 
 find_package(MITK REQUIRED)
+
+if(COMMAND mitkFunctionCheckMitkCompatibility)
+  mitkFunctionCheckMitkCompatibility(VERSIONS MITK_VERSION_PLUGIN_SYSTEM 1 REQUIRED)
+else()
+  message(SEND_ERROR "Your MITK version is too old. Please use Git hash b86bf28 or newer")
+endif()
+
 link_directories(${MITK_LINK_DIRECTORIES})
 
 #-----------------------------------------------------------------------------
@@ -135,7 +133,7 @@ set(CMAKE_MODULE_PATH
   ${MITK_SOURCE_DIR}/CMake
   ${CMAKE_MODULE_PATH}
   )
-  
+
 include(mitkFunctionCheckCompilerFlags)
 include(mitkFunctionGetGccVersion)
 include(mitkFunctionGetVersion)
@@ -205,44 +203,39 @@ endif()
 # Project C/CXX Flags
 #-----------------------------------------------------------------------------
 
-set(${PROJECT_NAME}_C_FLAGS "${COVERAGE_C_FLAGS} ${ADDITIONAL_C_FLAGS}")
-set(${PROJECT_NAME}_CXX_FLAGS "${VISIBILITY_CXX_FLAGS} ${COVERAGE_CXX_FLAGS} ${ADDITIONAL_CXX_FLAGS}")
+set(${PROJECT_NAME}_C_FLAGS "${MITK_C_FLAGS} ${COVERAGE_C_FLAGS}")
+set(${PROJECT_NAME}_C_FLAGS_DEBUG ${MITK_C_FLAGS_DEBUG})
+set(${PROJECT_NAME}_C_FLAGS_RELEASE ${MITK_C_FLAGS_RELEASE})
+set(${PROJECT_NAME}_CXX_FLAGS "${MITK_CXX_FLAGS} ${VISIBILITY_CXX_FLAGS} ${COVERAGE_CXX_FLAGS}")
+set(${PROJECT_NAME}_CXX_FLAGS_DEBUG ${MITK_CXX_FLAGS_DEBUG})
+set(${PROJECT_NAME}_CXX_FLAGS_RELEASE ${MITK_CXX_FLAGS_RELEASE})
+
+set(${PROJECT_NAME}_EXE_LINKER_FLAGS ${MITK_EXE_LINKER_FLAGS})
+set(${PROJECT_NAME}_SHARED_LINKER_FLAGS ${MITK_SHARED_LINKER_FLAGS})
+set(${PROJECT_NAME}_MODULE_LINKER_FLAGS ${MITK_MODULE_LINKER_FLAGS})
+
+# Add custom project flags here (e.g. for C++11 support)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-  set(cflags "-Wall -Wextra -Wpointer-arith -Winvalid-pch -Wcast-align -Wwrite-strings -D_FORTIFY_SOURCE=2")
-
-  mitkFunctionCheckCompilerFlags("-fdiagnostics-show-option" cflags)
-  mitkFunctionCheckCompilerFlags("-Wl,--no-undefined" cflags)
-  # Enable link dependency optimization to only link libraries which satisfy undefined
-  # symbol references. This aligns the link behavior with the one from the Windows linker.
-  mitkFunctionCheckCompilerFlags("-Wl,--as-needed" cflags)
-
+  # Get the gcc version. Some MITK CMake macros rely on the CMake
+  # variable GCC_VERSION being set.
   mitkFunctionGetGccVersion(${CMAKE_CXX_COMPILER} GCC_VERSION)
-  # With older version of gcc supporting the flag -fstack-protector-all, an extra dependency to libssp.so
-  # is introduced. If gcc is smaller than 4.4.0 and the build type is Release let's not include the flag.
-  # Doing so should allow to build package made for distribution using older linux distro.
-  if(${GCC_VERSION} VERSION_GREATER "4.4.0" OR (CMAKE_BUILD_TYPE STREQUAL "Debug" AND ${GCC_VERSION} VERSION_LESS "4.4.0"))
-    mitkFunctionCheckCompilerFlags("-fstack-protector-all" cflags)
-  endif()
-  if(MINGW)
-    # suppress warnings about auto imported symbols
-    set(${PROJECT_NAME}_CXX_FLAGS "-Wl,--enable-auto-import ${${PROJECT_NAME}_CXX_FLAGS}")
-    # we need to define a Windows version
-    set(${PROJECT_NAME}_CXX_FLAGS "-D_WIN32_WINNT=0x0500 ${${PROJECT_NAME}_CXX_FLAGS}")
-  endif()
-
-  set(${PROJECT_NAME}_C_FLAGS "${cflags} ${${PROJECT_NAME}_C_FLAGS}")
-  set(${PROJECT_NAME}_CXX_FLAGS "${cflags} -Woverloaded-virtual -Wstrict-null-sentinel -Wsign-promo ${${PROJECT_NAME}_CXX_FLAGS}")
-  # The following line produces a lot of warnings in MITK header files...
-  #set(${PROJECT_NAME}_CXX_FLAGS "${cflags} -Woverloaded-virtual -Wold-style-cast -Wstrict-null-sentinel -Wsign-promo ${${PROJECT_NAME}_CXX_FLAGS}")
 endif()
 
 #-----------------------------------------------------------------------------
 # Set C/CXX Flags
 #-----------------------------------------------------------------------------
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${${PROJECT_NAME}_CXX_FLAGS}")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${${PROJECT_NAME}_C_FLAGS}")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ${${PROJECT_NAME}_C_FLAGS_DEBUG}")
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} ${${PROJECT_NAME}_C_FLAGS_RELEASE}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${${PROJECT_NAME}_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${${PROJECT_NAME}_CXX_FLAGS_DEBUG}")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${${PROJECT_NAME}_CXX_FLAGS_RELEASE}")
+
+set(CMAKE_EXE_LINKER_FLAGS ${${PROJECT_NAME}_EXE_LINKER_FLAGS})
+set(CMAKE_SHARED_LINKER_FLAGS ${${PROJECT_NAME}_SHARED_LINKER_FLAGS})
+set(CMAKE_MODULE_LINKER_FLAGS ${${PROJECT_NAME}_MODULE_LINKER_FLAGS})
 
 #-----------------------------------------------------------------------------
 # Testing
@@ -381,7 +374,7 @@ include(mitkInstallRules)
 # set up the environment for the application and for Visual Studio
 if(WIN32)
   include(mitkFunctionCreateWindowsBatchScript)
-  
+
   set(VS_SOLUTION_FILE "${PROJECT_BINARY_DIR}/${PROJECT_NAME}.sln")
   foreach(VS_BUILD_TYPE debug release)
     mitkFunctionCreateWindowsBatchScript("${PROJECT_SOURCE_DIR}/CMake/StartVS.bat.in"
