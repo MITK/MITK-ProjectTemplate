@@ -19,13 +19,13 @@ PURPOSE.  See the above copyright notices for more information.
 #include "AwesomeImageFilter.h"
 
 #include <mitkImageAccessByItk.h>
-#include <itkShiftScaleInPlaceImageFilter.h>
+#include <itkShiftScaleImageFilter.h>
 
 template<typename TPixel, unsigned int VImageDimension>
 void AddOffset(itk::Image<TPixel, VImageDimension>* image, int offset, mitk::Image::Pointer outputImage)
 {
   typedef itk::Image<TPixel, VImageDimension> ImageType;
-  typedef itk::ShiftScaleInPlaceImageFilter<ImageType> FilterType;
+  typedef itk::ShiftScaleImageFilter<ImageType, ImageType> FilterType;
 
   typename FilterType::Pointer filter = FilterType::New();
   filter->SetShift(offset);
@@ -38,8 +38,8 @@ void AddOffset(itk::Image<TPixel, VImageDimension>* image, int offset, mitk::Ima
 AwesomeImageFilter::AwesomeImageFilter()
   : m_Offset(0)
 {
-  this->SetNumberOfInputs(1);
   this->SetNumberOfRequiredInputs(1);
+  this->SetNumberOfRequiredOutputs(1);
 }
 
 AwesomeImageFilter::~AwesomeImageFilter()
