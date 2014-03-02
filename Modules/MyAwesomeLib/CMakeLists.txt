@@ -1,5 +1,5 @@
 
 MITK_CREATE_MODULE(MyAwesomeLib
-  DEPENDS Mitk
+  DEPENDS MitkCore
 )
 
