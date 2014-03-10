@@ -1,4 +1,3 @@
-
 #-----------------------------------------------------------------------------
 # ExternalProjects
 #-----------------------------------------------------------------------------
@@ -14,7 +13,8 @@ if(EXTERNAL_MITK_DIR)
 endif()
 
 # Look for git early on, if needed
-if(NOT MITK_DIR AND MITK_USE_CTK AND NOT CTK_DIR)
+if((BUILD_TESTING AND NOT EXTERNAL_MITK_DATA_DIR) OR
+   (MITK_USE_CTK AND NOT EXTERNAL_CTK_DIR))
   find_package(Git REQUIRED)
 endif()
 
