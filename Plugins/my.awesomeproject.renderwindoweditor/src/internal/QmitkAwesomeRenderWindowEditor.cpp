@@ -25,6 +25,8 @@ PURPOSE.  See the above copyright notices for more information.
 
 #include <QVBoxLayout>
 
+#include <mitkPlaneGeometry.h>
+
 const std::string QmitkAwesomeRenderWindowEditor::EDITOR_ID = "org.mitk.editors.stdmultiwidget";
 
 
