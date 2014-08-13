@@ -19,6 +19,7 @@ PURPOSE.  See the above copyright notices for more information.
 #include "AwesomeImageFilter.h"
 
 #include <mitkImageAccessByItk.h>
+#include <mitkImageCast.h>
 #include <itkShiftScaleImageFilter.h>
 
 template<typename TPixel, unsigned int VImageDimension>
