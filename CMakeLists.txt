@@ -92,7 +92,7 @@ option(BUILD_TESTING "Test the project" ON)
 
 option(${MY_PROJECT_NAME}_BUILD_ALL_PLUGINS "Build all ${MY_PROJECT_NAME} plugins" OFF)
 option(${MY_PROJECT_NAME}_BUILD_ALL_APPS "Build all ${MY_PROJECT_NAME} applications" OFF)
-  
+
 mark_as_advanced(${MY_PROJECT_NAME}_INSTALL_RPATH_RELATIVE
                  ${MY_PROJECT_NAME}_BUILD_ALL_PLUGINS
                  ${MY_PROJECT_NAME}_BUILD_ALL_APPS
@@ -115,7 +115,7 @@ endif()
 # Prerequesites
 #-----------------------------------------------------------------------------
 
-find_package(MITK 2013.12.99 REQUIRED)
+find_package(MITK 2014.03.99 REQUIRED)
 
 if(COMMAND mitkFunctionCheckMitkCompatibility)
   mitkFunctionCheckMitkCompatibility(VERSIONS MITK_VERSION_PLUGIN_SYSTEM 1 REQUIRED)

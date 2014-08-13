@@ -22,7 +22,7 @@ PURPOSE.  See the above copyright notices for more information.
 #include <itkShiftScaleImageFilter.h>
 
 template<typename TPixel, unsigned int VImageDimension>
-void AddOffset(itk::Image<TPixel, VImageDimension>* image, int offset, mitk::Image::Pointer outputImage)
+void AddOffset(const itk::Image<TPixel, VImageDimension>* image, int offset, mitk::Image::Pointer outputImage)
 {
   typedef itk::Image<TPixel, VImageDimension> ImageType;
   typedef itk::ShiftScaleImageFilter<ImageType, ImageType> FilterType;
