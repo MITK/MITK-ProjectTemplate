@@ -1,10 +1,9 @@
 /**
-\bundlemainpage{my.awesomeproject.exampleplugin} Awesome Example Plugin
+\page my_awesomeproject_exampleplugin The Awesome Example Plugin
 
-\image html icon.xpm "Icon of Awesome Example Plugin"
+\imageMacro{icon.xpm,"Icon of Awesome Example Plugin",2.00}
 
-Available sections:
-  - \ref my_awesomeproject_examplepluginOverview
+\tableofcontents
 
 \section my_awesomeproject_examplepluginOverview Overview
 
