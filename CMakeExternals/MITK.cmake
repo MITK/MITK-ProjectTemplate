@@ -57,12 +57,34 @@ if(NOT MITK_DIR)
     MITK_USE_Python
    )
    
+  set(DESIRED_QT_VERSION 5)
+
   if(MITK_USE_QT)
     # Look for Qt at the superbuild level, to catch missing Qt libs early
-    find_package(Qt4 4.6.0 REQUIRED)
+    if(APPLE)
+	  set(DESIRED_QT_VERSION 4)
+      find_package(Qt4 4.7 REQUIRED)
+	else()
+	  find_package(Qt5
+	    5.0.0
+	    COMPONENTS
+		  Concurrent
+		  OpenGL
+		  PrintSupport
+		  Script
+		  Sql
+		  Svg
+		  WebKitWidgets
+		  Xml
+		  XmlPatterns
+		  UiTools
+		REQUIRED)
+	endif()
   endif()
   
-  set(additional_mitk_cmakevars )
+  set(additional_mitk_cmakevars
+    -DDESIRED_QT_VERSION:STRING=${DESIRED_QT_VERSION}
+  )
   
   # Configure the set of default pixel types
   set(MITK_ACCESSBYITK_INTEGRAL_PIXEL_TYPES

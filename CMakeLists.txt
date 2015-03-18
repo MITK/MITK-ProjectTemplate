@@ -83,6 +83,12 @@ foreach(type LIBRARY RUNTIME ARCHIVE)
 endforeach()
 
 #-----------------------------------------------------------------------------
+# Additional Settings (also shown during superbuild)
+#-----------------------------------------------------------------------------
+
+set(CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}" CACHE PATH "")
+
+#-----------------------------------------------------------------------------
 # Additional Options (also shown during superbuild)
 #-----------------------------------------------------------------------------
 
