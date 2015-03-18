@@ -19,26 +19,24 @@
 #include "QmitkAwesomeApplication.h"
 #include "QmitkAwesomePerspective.h"
 
+#include <berryLog.h>
+
 #include <mitkVersion.h>
-#include <berryQtAssistantUtil.h>
 
 #include <QFileInfo>
 #include <QDateTime>
-#include <QtPlugin>
 
 namespace mitk {
 
 ExampleAppPluginActivator* ExampleAppPluginActivator::inst = 0;
 
 ExampleAppPluginActivator::ExampleAppPluginActivator()
-  : pluginListener(0)
 {
   inst = this;
 }
 
 ExampleAppPluginActivator::~ExampleAppPluginActivator()
 {
-  delete pluginListener;
 }
 
 ExampleAppPluginActivator* ExampleAppPluginActivator::GetDefault()
@@ -57,15 +55,8 @@ void ExampleAppPluginActivator::start(ctkPluginContext* context)
 
   QString collectionFile = GetQtHelpCollectionFile();
 
-  berry::QtAssistantUtil::SetHelpCollectionFile(collectionFile);
-  berry::QtAssistantUtil::SetDefaultHelpUrl("qthelp://my.awesomeproject.exampleapp/bundle/index.html");
-
-  delete pluginListener;
-  pluginListener = new berry::QCHPluginListener(context);
-  context->connectPluginListener(pluginListener, SLOT(pluginChanged(ctkPluginEvent)), Qt::DirectConnection);
-
-  // register all QCH files from all the currently installed plugins
-  pluginListener->processPlugins();
+  // berry::QtAssistantUtil::SetHelpCollectionFile(collectionFile);
+  // berry::QtAssistantUtil::SetDefaultHelpUrl("qthelp://my.awesomeproject.exampleapp/bundle/index.html");
 }
 
 ctkPluginContext* ExampleAppPluginActivator::GetPluginContext() const
@@ -112,4 +103,7 @@ QString ExampleAppPluginActivator::GetQtHelpCollectionFile() const
 
 }
 
-Q_EXPORT_PLUGIN2(my_awesomeproject_exampleapp, mitk::ExampleAppPluginActivator)
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+  #include <QtPlugin>
+  Q_EXPORT_PLUGIN2(my_awesomeproject_exampleapp, mitk::ExampleAppPluginActivator)
+#endif

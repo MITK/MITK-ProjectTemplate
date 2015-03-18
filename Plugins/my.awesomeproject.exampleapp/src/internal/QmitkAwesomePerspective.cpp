@@ -31,7 +31,7 @@ QmitkAwesomePerspective::QmitkAwesomePerspective(const QmitkAwesomePerspective& 
 
 void QmitkAwesomePerspective::CreateInitialLayout(berry::IPageLayout::Pointer layout)
 {
-  std::string editorArea = layout->GetEditorArea();
+  QString editorArea = layout->GetEditorArea();
 
   layout->AddView("org.mitk.views.datamanager", 
     berry::IPageLayout::LEFT, 0.3f, editorArea);

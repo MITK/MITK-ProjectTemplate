@@ -18,12 +18,11 @@
 #include "QmitkAwesomeWorkbenchAdvisor.h"
 #include "internal/mitkExampleAppPluginActivator.h"
 
-#include <berryQtAssistantUtil.h>
 #include <QmitkExtWorkbenchWindowAdvisor.h>
 
 #include <mitkWorkbenchUtil.h>
 
-const std::string QmitkAwesomeWorkbenchAdvisor::DEFAULT_PERSPECTIVE_ID =
+const QString QmitkAwesomeWorkbenchAdvisor::DEFAULT_PERSPECTIVE_ID =
     "my.awesomeproject.AwesomePerspective";
 
 void
@@ -50,7 +49,7 @@ QmitkAwesomeWorkbenchAdvisor::CreateWorkbenchWindowAdvisor(
   return advisor;
 }
 
-std::string QmitkAwesomeWorkbenchAdvisor::GetInitialWindowPerspectiveId()
+QString QmitkAwesomeWorkbenchAdvisor::GetInitialWindowPerspectiveId()
 {
   return DEFAULT_PERSPECTIVE_ID;
 }

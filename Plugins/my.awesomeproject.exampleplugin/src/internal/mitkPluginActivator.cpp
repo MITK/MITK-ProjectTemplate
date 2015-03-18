@@ -1,7 +1,4 @@
 #include "mitkPluginActivator.h"
-
-#include <QtPlugin>
-
 #include "QmitkAwesomeView.h"
 
 namespace mitk {
@@ -18,4 +15,7 @@ void PluginActivator::stop(ctkPluginContext* context)
 
 }
 
-Q_EXPORT_PLUGIN2(my_awesomeproject_exampleplugin, mitk::PluginActivator)
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+  #include <QtPlugin>
+  Q_EXPORT_PLUGIN2(my_awesomeproject_exampleplugin, mitk::PluginActivator)
+#endif

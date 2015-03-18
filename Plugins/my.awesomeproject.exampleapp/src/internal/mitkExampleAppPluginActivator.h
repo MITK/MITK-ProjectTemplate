@@ -23,13 +23,14 @@
 
 #include <QString>
 
-#include <berryQCHPluginListener.h>
-
 namespace mitk {
 
-class ExampleAppPluginActivator : public QObject, public berry::AbstractUICTKPlugin
+class ExampleAppPluginActivator : public berry::AbstractUICTKPlugin
 {
   Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+  Q_PLUGIN_METADATA(IID "my_awesomeproject_exampleapp")
+#endif
   Q_INTERFACES(ctkPluginActivator)
   
 public:
@@ -50,7 +51,6 @@ private:
   static ExampleAppPluginActivator* inst;
 
   ctkPluginContext* context;
-  berry::QCHPluginListener* pluginListener;
 
   mutable QString helpCollectionFile;
 };

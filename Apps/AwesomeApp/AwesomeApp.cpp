@@ -38,11 +38,11 @@ int main(int argc, char** argv)
   provFile.setFileName("AwesomeApp.provisioning");
 
   Poco::Util::MapConfiguration* sbConfig(new Poco::Util::MapConfiguration());
-  sbConfig->setString(berry::Platform::ARG_PROVISIONING, provFile.toString());
+  sbConfig->setString(berry::Platform::ARG_PROVISIONING.toStdString(), provFile.toString());
   // -------------------------------------------------------------------
   // Here you can switch to your customizable application:
   // -------------------------------------------------------------------
-  sbConfig->setString(berry::Platform::ARG_APPLICATION, "org.mitk.qt.extapplication");
+  sbConfig->setString(berry::Platform::ARG_APPLICATION.toStdString(), "org.mitk.qt.extapplication");
 //  sbConfig->setString(berry::Platform::ARG_APPLICATION, "my.awesomeproject.exampleapp");
   return berry::Starter::Run(argc, argv, sbConfig);
 }

@@ -31,14 +31,14 @@ class QmitkAwesomeWorkbenchAdvisor: public berry::QtWorkbenchAdvisor
 {
 public:
 
-  static const std::string DEFAULT_PERSPECTIVE_ID; // = "my.awesomeproject.AwesomePerspective"
+  static const QString DEFAULT_PERSPECTIVE_ID; // = "my.awesomeproject.AwesomePerspective"
 
   void Initialize(berry::IWorkbenchConfigurer::Pointer configurer);
 
   berry::WorkbenchWindowAdvisor* CreateWorkbenchWindowAdvisor(
       berry::IWorkbenchWindowConfigurer::Pointer configurer);
 
-  std::string GetInitialWindowPerspectiveId();
+  QString GetInitialWindowPerspectiveId();
 
 };
 
