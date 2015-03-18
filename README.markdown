@@ -26,11 +26,12 @@ Supported Platforms
 -------------------
 
 - Linux
-- Windows XP or newer with Visual Studio 2008
+- Windows XP or newer with Visual Studio 2010
 - MacOSX 10.5 or newer
 
 Requirements
 ------------
 
-- CMake 2.8.4 or newer
-- Qt 4.6.2 or newer (it is also possible to create a MITK project without any Qt dependencies)
+- CMake 3.2 or newer
+- Qt 5.0 or newer (Linux, Windows), Qt 4.7 or newer (MacOSX)
+- It is also possible to create an MITK project without any Qt dependencies
