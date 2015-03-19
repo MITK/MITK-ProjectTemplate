@@ -27,6 +27,9 @@
 class my_awesomeproject_renderwindoweditor_Activator : public QObject, public ctkPluginActivator
 {
   Q_OBJECT
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+  Q_PLUGIN_METADATA(IID "my_awesomeproject_renderwindoweditor")
+#endif
   Q_INTERFACES(ctkPluginActivator)
 
 public:
