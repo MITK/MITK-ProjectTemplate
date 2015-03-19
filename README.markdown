@@ -26,8 +26,8 @@ Supported Platforms
 -------------------
 
 - Linux
-- Windows XP or newer with Visual Studio 2010
-- MacOSX 10.5 or newer
+- Windows XP or newer with Visual Studio 2012
+- MacOSX 10.9 or newer
 
 Requirements
 ------------
