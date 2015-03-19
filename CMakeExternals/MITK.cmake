@@ -219,19 +219,19 @@ else()
 
   find_package(MITK REQUIRED)
   
-  if(ITK_DIR)
+  if(my_itk_dir AND ITK_DIR)
     if(NOT my_itk_dir STREQUAL ${ITK_DIR})
       message(FATAL_ERROR "ITK packages do not match:\n   ${MY_PROJECT_NAME}: ${my_itk_dir}\n  MITK: ${ITK_DIR}")
     endif()
   endif()
   
-  if(VTK_DIR)
+  if(my_vtk_dir AND VTK_DIR)
     if(NOT my_vtk_dir STREQUAL ${VTK_DIR})
       message(FATAL_ERROR "VTK packages do not match:\n   ${MY_PROJECT_NAME}: ${my_vtk_dir}\n  MITK: ${VTK_DIR}")
     endif()
   endif()
   
-  if(MITK_QMAKE_EXECUTABLE)
+  if(my_qmake_executable AND MITK_QMAKE_EXECUTABLE)
     if(NOT my_qmake_executable STREQUAL ${MITK_QMAKE_EXECUTABLE})
       message(FATAL_ERROR "Qt qmake does not match:\n   ${MY_PROJECT_NAME}: ${my_qmake_executable}\n  MITK: ${MITK_QMAKE_EXECUTABLE}")
     endif()
