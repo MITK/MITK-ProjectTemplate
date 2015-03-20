@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
 # Change project and application name to your own
 set(MY_PROJECT_NAME AwesomeProject)
