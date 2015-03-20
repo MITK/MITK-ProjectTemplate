@@ -196,6 +196,10 @@ if(NOT MITK_DIR)
       ${additional_mitk_cmakevars}
       -DBUILD_SHARED_LIBS:BOOL=ON
       -DBUILD_TESTING:BOOL=${MITK_BUILD_TESTING}
+    CMAKE_CACHE_ARGS
+      ${ep_common_cache_args}
+    CMAKE_CACHE_DEFAULT_ARGS
+      ${ep_common_cache_default_args}
     DEPENDS
       ${proj_DEPENDENCIES}
     )
