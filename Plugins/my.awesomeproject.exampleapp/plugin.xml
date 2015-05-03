@@ -2,8 +2,8 @@
 <?eclipse version="3.0"?>
 <plugin>
 
-  <extension point="org.blueberry.osgi.applications">
-    <application id="my.awesomeproject.exampleapp">
+  <extension id="my.awesomeproject.exampleapp" point="org.blueberry.osgi.applications">
+    <application>
       <run class="QmitkAwesomeApplication"/>
     </application>
   </extension>
