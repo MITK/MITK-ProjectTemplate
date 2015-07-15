@@ -82,6 +82,12 @@ set(ep_common_cache_default_args
   "-DCMAKE_LIBRARY_PATH:PATH=${CMAKE_LIBRARY_PATH}"
 )
 
+if(Qt5_DIR)
+  list(APPEND ep_common_cache_default_args
+    "-DQt5_DIR:PATH=${Qt5_DIR}"
+  )
+endif()
+
 # Include external projects
 foreach(p ${external_projects})
   include(CMakeExternals/${p}.cmake)
