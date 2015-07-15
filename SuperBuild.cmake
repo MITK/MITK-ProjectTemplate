@@ -154,6 +154,12 @@ mark_as_advanced(${MY_PROJECT_NAME}_ADDITIONAL_EXE_LINKER_FLAGS ${MY_PROJECT_NAM
 
 set(proj ${MY_PROJECT_NAME}-Configure)
 
+set(cmake_cache_args)
+
+if(Qt5_DIR)
+  set(cmake_cache_args "-DQt5_DIR:PATH=${Qt5_DIR}")
+endif()
+
 ExternalProject_Add(${proj}
   DOWNLOAD_COMMAND ""
   CMAKE_GENERATOR ${gen}
@@ -166,6 +172,7 @@ ExternalProject_Add(${proj}
     "-DCMAKE_PREFIX_PATH:PATH=${CMAKE_PREFIX_PATH}"
     "-DCMAKE_LIBRARY_PATH:PATH=${CMAKE_LIBRARY_PATH}"
     "-DCMAKE_INCLUDE_PATH:PATH=${CMAKE_INCLUDE_PATH}"
+    ${cmake_cache_args}
     # --------------- Compile options ----------------
     -DCMAKE_C_COMPILER:FILEPATH=${CMAKE_C_COMPILER}
     -DCMAKE_CXX_COMPILER:FILEPATH=${CMAKE_CXX_COMPILER}
