@@ -15,17 +15,13 @@ PURPOSE.  See the above copyright notices for more information.
 
 =========================================================================*/
 
-#include "QmitkAwesomeRenderWindowEditor.h"
-
-#include <QmitkRenderWindow.h>
-
+#include <mitkPlaneGeometry.h>
 #include <mitkInteractionConst.h>
-#include <mitkPositionEvent.h>
-#include <mitkStateEvent.h>
 
+#include "QmitkAwesomeRenderWindowEditor.h"
+#include <QmitkRenderWindow.h>
 #include <QVBoxLayout>
 
-#include <mitkPlaneGeometry.h>
 
 const std::string QmitkAwesomeRenderWindowEditor::EDITOR_ID = "org.mitk.editors.stdmultiwidget";
 
@@ -72,23 +68,6 @@ mitk::Point3D QmitkAwesomeRenderWindowEditor::GetSelectedPosition(const QString 
 
 void QmitkAwesomeRenderWindowEditor::SetSelectedPosition(const mitk::Point3D &pos, const QString &/*id*/)
 {
-  // create a PositionEvent with the given position and
-  // tell the slice navigation controller to move there
-
-  mitk::Point2D p2d;
-  mitk::PositionEvent event( m_RenderWindow->GetRenderer(), 0, 0, 0,
-                             mitk::Key_unknown, p2d, pos );
-  mitk::StateEvent stateEvent(mitk::EIDLEFTMOUSEBTN, &event);
-  mitk::StateEvent stateEvent2(mitk::EIDLEFTMOUSERELEASE, &event);
-
-  m_RenderWindow->GetSliceNavigationController()->HandleEvent( &stateEvent );
-
-  // just in case SNCs will develop something that depends on the mouse
-  // button being released again
-  m_RenderWindow->GetSliceNavigationController()->HandleEvent( &stateEvent2 );
-
-  // update displays
-  //mitk::RenderingManager::GetInstance()->RequestUpdateAll();
 }
 
 void QmitkAwesomeRenderWindowEditor::EnableDecorations(bool enable, const QStringList &decorations)

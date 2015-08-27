@@ -60,7 +60,7 @@ public:
   /**
    * \see mitk::IRenderWindowPart::SetSelectedPosition()
    */
-  void SetSelectedPosition(const mitk::Point3D& pos, const QString& id = QString());
+  void SetSelectedPosition(const mitk::Point3D &pos, const QString& id = QString());
 
   /**
    * \see mitk::IRenderWindowPart::EnableDecorations()
