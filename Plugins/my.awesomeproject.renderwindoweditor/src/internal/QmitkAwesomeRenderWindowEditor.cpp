@@ -68,6 +68,7 @@ mitk::Point3D QmitkAwesomeRenderWindowEditor::GetSelectedPosition(const QString 
 
 void QmitkAwesomeRenderWindowEditor::SetSelectedPosition(const mitk::Point3D &pos, const QString &/*id*/)
 {
+  m_RenderWindow->GetSliceNavigationController()->SelectSliceByPoint(pos);
 }
 
 void QmitkAwesomeRenderWindowEditor::EnableDecorations(bool enable, const QStringList &decorations)
