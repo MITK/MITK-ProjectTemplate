@@ -20,7 +20,7 @@ Especially you should do a global search and replace for the string "awesome" to
 
 You can download a [tarball](https://github.com/MITK/MITK-ProjectTemplate/tarball/master) or [zipball](https://github.com/MITK/MITK-ProjectTemplate/zipball/master) which contains the current sources. You should only clone this repository (or fork it on github) if you want to work with the project template itself (i.e. by contributing improvements).
 
-Please read [How to create a new MITK project](http://docs.mitk.org/nightly-qt4/HowToNewProject.html) for build instructions.
+Please read [How to create a new MITK project](http://docs.mitk.org/nightly/HowToNewProject.html) for build instructions.
 
 Supported Platforms
 -------------------
@@ -33,5 +33,5 @@ Requirements
 ------------
 
 - CMake 3.2 or newer
-- Qt 5.0 or newer (Linux, Windows), Qt 4.7 or newer (MacOSX)
+- Qt 5.0 to Qt 5.4.1 (Linux, Windows), Qt 4.7 or newer (Not Qt 5.x) (MacOSX)
 - It is also possible to create an MITK project without any Qt dependencies
