@@ -121,7 +121,7 @@ endif()
 # Prerequesites
 #-----------------------------------------------------------------------------
 
-find_package(MITK 2015.05.0 REQUIRED)
+find_package(MITK 2015.05.2 REQUIRED)
 
 if(COMMAND mitkFunctionCheckMitkCompatibility)
   mitkFunctionCheckMitkCompatibility(VERSIONS MITK_VERSION_PLUGIN_SYSTEM 1 REQUIRED)
