@@ -1,0 +1,10 @@
+/**
+\page AwesomePortal Awesome Portal
+\ingroup index
+
+This page could serve as a portal for your general documentation. It will show up in the related pages (called "Manual" in our layout).
+
+To change the page pointed at by the "Home" button change the content of the top-level README.markdown.
+To change the pages pointed at by other menu buttons, like "Download" or "Bugzilla", take a look at the MITKDoxygenLayout.xml.
+
+*/

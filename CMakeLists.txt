@@ -153,6 +153,9 @@ set(${PROJECT_NAME}_VERSION_MINOR "1")
 set(${PROJECT_NAME}_VERSION_PATCH "1")
 set(${PROJECT_NAME}_VERSION_STRING "${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}")
 
+# Look for optional Doxygen package
+find_package(Doxygen)
+
 # Ask the user if a console window should be shown with the applications
 option(${PROJECT_NAME}_SHOW_CONSOLE_WINDOW "Use this to enable or disable the console window when starting GUI Applications" ON)
 mark_as_advanced(${PROJECT_NAME}_SHOW_CONSOLE_WINDOW)
@@ -169,6 +172,14 @@ list(APPEND MODULES_PACKAGE_DEPENDS_DIRS ${${PROJECT_NAME}_MODULES_PACKAGE_DEPEN
 #-----------------------------------------------------------------------------
 
 mitkFunctionGetVersion(${PROJECT_SOURCE_DIR} ${PROJECT_NAME})
+
+#-----------------------------------------------------------------------------
+# Documentation
+#-----------------------------------------------------------------------------
+
+if(DOXYGEN_FOUND)
+  add_subdirectory(Documentation)
+endif()
 
 #-----------------------------------------------------------------------------
 # Installation preparation
