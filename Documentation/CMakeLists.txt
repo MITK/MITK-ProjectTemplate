@@ -44,7 +44,7 @@ set(${PROJECT_NAME}_DOXYGEN_GENERATE_QHP "NO")
 if(${PROJECT_NAME}_DOXYGEN_GENERATE_QCH_FILES)
 
   find_program(QT_HELPGENERATOR_EXECUTABLE
-    NAMES qhelpgenerator qhelpgenerator-qt4 qhelpgenerator4
+    NAMES qhelpgenerator qhelpgenerator-qt5 qhelpgenerator5
     PATHS ${QT_BINARY_DIR}
     DOC "The location of the the Qt help generator executable"
     NO_DEFAULT_PATH
