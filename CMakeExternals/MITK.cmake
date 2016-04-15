@@ -14,7 +14,7 @@ if(NOT MITK_DIR)
 
   option(MITK_USE_SUPERBUILD "Use superbuild for MITK" ON)
   option(MITK_USE_BLUEBERRY "Build the BlueBerry platform in MITK" ON)
-  option(MITK_BUILD_TUTORIAL "Build the MITK tutorial" OFF)
+  option(MITK_BUILD_EXAMPLES "Build the MITK examples" OFF)
   option(MITK_BUILD_ALL_PLUGINS "Build all MITK plugins" OFF)
   option(MITK_BUILD_TESTING "Build the MITK unit tests" OFF)
   option(MITK_USE_CTK "Use CTK in MITK" ${MITK_USE_BLUEBERRY})
@@ -46,7 +46,7 @@ if(NOT MITK_DIR)
   set(mitk_cmake_boolean_args
     MITK_USE_SUPERBUILD
     MITK_USE_BLUEBERRY
-    MITK_BUILD_TUTORIAL
+    MITK_BUILD_EXAMPLES
     MITK_BUILD_ALL_PLUGINS
     MITK_USE_CTK
     MITK_USE_DCMTK
@@ -54,35 +54,24 @@ if(NOT MITK_DIR)
     MITK_USE_OpenCV
     MITK_USE_Python
    )
-   
-  set(DESIRED_QT_VERSION 5)
 
   if(MITK_USE_QT)
     # Look for Qt at the superbuild level, to catch missing Qt libs early
-    if(APPLE)
-	  set(DESIRED_QT_VERSION 4)
-      find_package(Qt4 4.7 REQUIRED)
-	else()
-	  find_package(Qt5
-	    5.0.0
-	    COMPONENTS
+	  find_package(Qt5 5.0.0 COMPONENTS
 		  Concurrent
 		  OpenGL
 		  PrintSupport
 		  Script
 		  Sql
 		  Svg
+      Widgets
 		  WebKitWidgets
 		  Xml
 		  XmlPatterns
 		  UiTools
-		REQUIRED)
-	endif()
+      Help
+		  REQUIRED)
   endif()
-  
-  set(additional_mitk_cmakevars
-    -DDESIRED_QT_VERSION:STRING=${DESIRED_QT_VERSION}
-  )
   
   # Configure the set of default pixel types
   set(MITK_ACCESSBYITK_INTEGRAL_PIXEL_TYPES
