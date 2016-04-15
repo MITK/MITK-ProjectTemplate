@@ -33,5 +33,5 @@ Requirements
 ------------
 
 - CMake 3.2 or newer
-- Qt 5.0 to Qt 5.4.1 (Linux, Windows), Qt 4.7 or newer (Not Qt 5.x) (MacOSX)
+- Qt 5.0 to Qt 5.5
 - It is also possible to create an MITK project without any Qt dependencies
