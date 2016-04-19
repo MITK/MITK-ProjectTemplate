@@ -1,4 +1,3 @@
-
 set(module_dirs
   MyAwesomeLib
 )

@@ -1,5 +1,3 @@
-
-MITK_CREATE_MODULE(MyAwesomeLib
-  DEPENDS MitkCore
+mitk_create_module(MyAwesomeLib
+  DEPENDS PUBLIC MitkCore
 )
-
