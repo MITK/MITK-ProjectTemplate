@@ -1,32 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QmitkAwesomeViewControls</class>
- <widget class="QWidget" name="QmitkAwesomeViewControls">
+ <class>AwesomeViewControls</class>
+ <widget class="QWidget" name="AwesomeViewControls">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>222</width>
-    <height>161</height>
+    <width>220</width>
+    <height>160</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>0</width>
-    <height>0</height>
-   </size>
-  </property>
   <property name="windowTitle">
-   <string>QmitkTemplate</string>
+   <string>Awesome View</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="labelWarning">
+    <widget class="QLabel" name="selectImageLabel">
      <property name="styleSheet">
       <string notr="true">QLabel { color: rgb(255, 0, 0) }</string>
      </property>
      <property name="text">
-      <string>Please select an image!</string>
+      <string>Please select an image.</string>
      </property>
     </widget>
    </item>
@@ -44,7 +38,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="spinboxOffset">
+       <widget class="QSpinBox" name="offsetSpinBox">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -60,9 +54,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="buttonPerformImageProcessing">
+    <widget class="QPushButton" name="processImageButton">
      <property name="toolTip">
-      <string>Do image processing</string>
+      <string>Process selected image</string>
      </property>
      <property name="text">
       <string>Add Offset</string>
@@ -70,7 +64,7 @@
     </widget>
    </item>
    <item>
-    <spacer name="spacer1">
+    <spacer name="spacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>

@@ -1,43 +1,24 @@
-set(SRC_CPP_FILES
-  
-)
-
-set(INTERNAL_CPP_FILES
-  mitkPluginActivator.cpp
-  QmitkAwesomeView.cpp
+set(CPP_FILES
+  src/internal/my_awesomeproject_exampleplugin_PluginActivator.cpp
+  src/internal/AwesomeView.cpp
 )
 
 set(UI_FILES
-  src/internal/QmitkAwesomeViewControls.ui
+  src/internal/AwesomeViewControls.ui
 )
 
 set(MOC_H_FILES
-  src/internal/mitkPluginActivator.h
-  src/internal/QmitkAwesomeView.h
+  src/internal/my_awesomeproject_exampleplugin_PluginActivator.h
+  src/internal/AwesomeView.h
 )
 
-# list of resource files which can be used by the plug-in
-# system without loading the plug-ins shared library,
-# for example the icon used in the menu and tabs for the
-# plug-in views in the workbench
+# List of resource files that can be used by the plugin system without loading
+# the actual plugin. For example, the icon that is typically displayed in the
+# plugin view menu at the top of the application window.
 set(CACHED_RESOURCE_FILES
   resources/icon.xpm
   plugin.xml
 )
 
-# list of Qt .qrc files which contain additional resources
-# specific to this plugin
 set(QRC_FILES
-
 )
-
-set(CPP_FILES )
-
-foreach(file ${SRC_CPP_FILES})
-  set(CPP_FILES ${CPP_FILES} src/${file})
-endforeach(file ${SRC_CPP_FILES})
-
-foreach(file ${INTERNAL_CPP_FILES})
-  set(CPP_FILES ${CPP_FILES} src/internal/${file})
-endforeach(file ${INTERNAL_CPP_FILES})
-
