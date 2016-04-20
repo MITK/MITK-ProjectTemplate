@@ -117,4 +117,26 @@ void AwesomeView::ProcessSelectedImage()
       this->GetDataStorage()->Add(processedImageDataNode);
     }
   }
+
+  // Now it's your turn. This class/method has lots of room for improvements,
+  // for example:
+  //
+  // - What happens when multiple items are selected but the first one isn't
+  //   an image? - There isn't any feedback for the user at all.
+  // - What's the front item of a selection? Does it depend on the order
+  //   of selection or the position in the Data Manager? - Isn't it
+  //   better to process all selected images? Don't forget to adjust the
+  //   titles of the UI widgets.
+  // - In addition to the the displayed label, it's probably a good idea to
+  //   enable or disable the button depending on the selection.
+  // - You may want to copy the level window of the input image to the
+  //   result image before you add it to the data storage in order to see
+  //   the effect of the offset immediately. Hint: The level window is a
+  //   data node property.
+  // - There's a major flaw in this implementation. The AwesomeImageFilter
+  //   does only work for 2-dimensional and 3-dimensional integer images,
+  //   but we totally ignore this fact above. Fix it by validating the
+  //   filter output (mitk::Image::IsInitialized()). A better solution
+  //   would probably be to not swallow the exception in the filter itself,
+  //   but to catch it here when using the filter.
 }
