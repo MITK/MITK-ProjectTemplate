@@ -83,7 +83,7 @@ void AwesomeImageFilter::GenerateData()
       // the pixel type. As your function template is compiled for each allowed
       // combination, compile time and code size may increase dramatically.
       // As a rule of thumb, use a suitable multiplexer macro that is as
-      // constrained as possible and yet generic as necessary.
+      // constrained as possible and yet as generic as necessary.
       // To prevent a combinatorial explosion, image dimension is restricted to
       // 2 and 3 even for the dimension-variable multiplexer macros.
       // Thus, the following multiplexer macro allows for 2-dimensional and
