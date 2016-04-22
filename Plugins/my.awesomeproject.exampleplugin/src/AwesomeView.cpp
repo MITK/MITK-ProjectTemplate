@@ -19,9 +19,27 @@ See LICENSE.txt or http://www.mitk.org for details.
 #include <berryISelectionService.h>
 #include <berryIWorkbenchWindow.h>
 
+#include <usModuleRegistry.h>
+
 #include <QMessageBox>
 
 #include <AwesomeImageFilter.h>
+#include <AwesomeImageInteractor.h>
+
+// Helper function to create a fully set up instance of our
+// AwesomeImageInteractor, based on the state machine specified in Paint.xml
+// as well as its configuration in PaintConfig.xml. Both files are compiled
+// into our MyAwesomeLib module as resources.
+static AwesomeImageInteractor::Pointer CreateAwesomeImageInteractor()
+{
+  auto myAwesomeLib = us::ModuleRegistry::GetModule("MyAwesomeLib");
+
+  auto interactor = AwesomeImageInteractor::New();
+  interactor->LoadStateMachine("Paint.xml", myAwesomeLib);
+  interactor->SetEventConfig("PaintConfig.xml", myAwesomeLib);
+
+  return interactor;
+}
 
 // Don't forget to initialize the VIEW_ID.
 const std::string AwesomeView::VIEW_ID = "my.awesomeproject.views.awesomeview";
@@ -102,17 +120,40 @@ void AwesomeView::ProcessSelectedImage()
 
       filter->Update();
 
+      mitk::Image::Pointer processedImage = filter->GetOutput();
+
+      if (processedImage.IsNull() || !processedImage->IsInitialized())
+        return;
+
       MITK_INFO << "  done";
 
-      // Stuff the resulting image into a data node and add it to the data
-      // storage, which will eventually display the image in the application.
-      // Don't be surprised if the offset seems to have no effect on the image,
-      // as each image has its own level window, which will automatically adjust
-      // its range by default. Play around with the level window widget right
-      // next to the render windows to see the difference.
+      // Stuff the resulting image into a data node, set some properties,
+      // and add it to the data storage, which will eventually display the
+      // image in the application.
       auto processedImageDataNode = mitk::DataNode::New();
-      processedImageDataNode->SetData(filter->GetOutput());
-      processedImageDataNode->SetName(QString("%1 (Offset: %2)").arg(imageName.c_str()).arg(offset).toStdString());
+      processedImageDataNode->SetData(processedImage);
+
+      QString name = QString("%1 (Offset: %2)").arg(imageName.c_str()).arg(offset);
+      processedImageDataNode->SetName(name.toStdString());
+
+      // We don't really need to copy the level window, but if we wouldn't
+      // do it, the new level window would be initialized to display the image
+      // with optimal contrast in order to capture the whole range of pixel
+      // values. This is also true for the input image as long as one didn't
+      // modify its level window manually. Thus, the images would appear
+      // identical unless you compare the level window widget for both images.
+      mitk::LevelWindow levelWindow;
+
+      if (firstSelectedDataNode->GetLevelWindow(levelWindow))
+        processedImageDataNode->SetLevelWindow(levelWindow);
+
+      // We also attach our AwesomeImageInteractor, which allows us to paint
+      // on the resulting images by using the mouse as long as the CTRL key
+      // is pressed.
+      auto interactor = CreateAwesomeImageInteractor();
+
+      if (interactor.IsNotNull())
+        interactor->SetDataNode(processedImageDataNode);
 
       this->GetDataStorage()->Add(processedImageDataNode);
     }
@@ -129,14 +170,4 @@ void AwesomeView::ProcessSelectedImage()
   //   titles of the UI widgets.
   // - In addition to the the displayed label, it's probably a good idea to
   //   enable or disable the button depending on the selection.
-  // - You may want to copy the level window of the input image to the
-  //   result image before you add it to the data storage in order to see
-  //   the effect of the offset immediately. Hint: The level window is a
-  //   data node property.
-  // - There's a major flaw in this implementation. The AwesomeImageFilter
-  //   does only work for 2-dimensional and 3-dimensional integer images,
-  //   but we totally ignore this fact above. Fix it by validating the
-  //   filter output (mitk::Image::IsInitialized()). A better solution
-  //   would probably be to not swallow the exception in the filter itself,
-  //   but to catch it here when using the filter.
 }
