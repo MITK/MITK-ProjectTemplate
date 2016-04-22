@@ -27,7 +27,7 @@ See LICENSE.txt or http://www.mitk.org for details.
 // While you are free to derive directly from ITK filter base classes,
 // MITK filter base classes provide typed accessor methods for the inputs
 // and outputs, which will save you and your clients lots of manual casting.
-class MyAwesomeLib_EXPORT AwesomeImageFilter : public mitk::ImageToImageFilter
+class MyAwesomeLib_EXPORT AwesomeImageFilter final : public mitk::ImageToImageFilter
 {
 public:
   // All classes that derive from an ITK-based MITK class need at least the
@@ -40,13 +40,12 @@ public:
   itkSetMacro(Offset, int)
   itkGetMacro(Offset, int)
 
-protected:
+private:
   AwesomeImageFilter();
   ~AwesomeImageFilter();
 
   void GenerateData() override;
 
-private:
   int m_Offset;
 };
 
