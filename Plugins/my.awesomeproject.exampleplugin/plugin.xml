@@ -4,6 +4,6 @@
     <view id="my.awesomeproject.views.awesomeview"
           name="Awesome View"
           class="AwesomeView"
-          icon="resources/icon.xpm" />
+          icon="resources/AwesomeIcon.png" />
   </extension>
 </plugin>
