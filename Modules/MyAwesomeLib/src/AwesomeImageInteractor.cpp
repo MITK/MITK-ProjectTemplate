@@ -62,7 +62,7 @@ static void Paint(mitk::Image::Pointer image, itk::Index<3> index, unsigned int 
   // As soon as the ImagePixelWriteAccessor object goes out of scope at the
   // end of this function, the image will be unlocked again (RAII).
   mitk::ImagePixelWriteAccessor<T> writeAccessor(image, image->GetVolumeData(timeStep));
-  writeAccessor.SetPixelByIndex(index, std::numeric_limits<T>::max());
+  writeAccessor.SetPixelByIndex(index, std::numeric_limits<T>::min());
 
   // Don't forget to update the modified time stamp of the image. Otherwise,
   // everything downstream wouldn't recognize that the image changed,
