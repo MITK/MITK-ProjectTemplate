@@ -5,6 +5,33 @@ set(MY_PROJECT_NAME AwesomeProject)
 set(MY_APP_NAME AwesomeApp)
 
 #-----------------------------------------------------------------------------
+# Set a default build type if none was specified
+#-----------------------------------------------------------------------------
+
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  message(STATUS "Setting build type to 'Debug' as none was specified.")
+  set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build." FORCE)
+
+  # Set the possible values of build type for cmake-gui
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY
+               STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+
+#-----------------------------------------------------------------------------
+# Superbuild Option - Enabled by default
+#-----------------------------------------------------------------------------
+
+option(${MY_PROJECT_NAME}_USE_SUPERBUILD "Build ${MY_PROJECT_NAME} and the projects it depends on via SuperBuild.cmake." ON)
+
+if(${MY_PROJECT_NAME}_USE_SUPERBUILD)
+  project(${MY_PROJECT_NAME}-superbuild)
+  set(${MY_PROJECT_NAME}_SOURCE_DIR ${PROJECT_SOURCE_DIR})
+  set(${MY_PROJECT_NAME}_BINARY_DIR ${PROJECT_BINARY_DIR})
+else()
+  project(${MY_PROJECT_NAME})
+endif()
+
+#-----------------------------------------------------------------------------
 # Check miminum compiler versions
 #-----------------------------------------------------------------------------
 
@@ -43,33 +70,6 @@ endif()
 set(CMAKE_CXX_EXTENSIONS 0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED 1)
-
-#-----------------------------------------------------------------------------
-# Set a default build type if none was specified
-#-----------------------------------------------------------------------------
-
-if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  message(STATUS "Setting build type to 'Debug' as none was specified.")
-  set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build." FORCE)
-
-  # Set the possible values of build type for cmake-gui
-  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY
-               STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
-endif()
-
-#-----------------------------------------------------------------------------
-# Superbuild Option - Enabled by default
-#-----------------------------------------------------------------------------
-
-option(${MY_PROJECT_NAME}_USE_SUPERBUILD "Build ${MY_PROJECT_NAME} and the projects it depends on via SuperBuild.cmake." ON)
-
-if(${MY_PROJECT_NAME}_USE_SUPERBUILD)
-  project(${MY_PROJECT_NAME}-superbuild)
-  set(${MY_PROJECT_NAME}_SOURCE_DIR ${PROJECT_SOURCE_DIR})
-  set(${MY_PROJECT_NAME}_BINARY_DIR ${PROJECT_BINARY_DIR})
-else()
-  project(${MY_PROJECT_NAME})
-endif()
 
 #-----------------------------------------------------------------------------
 # See http://cmake.org/cmake/help/cmake-2-8-docs.html#section_Policies for details
