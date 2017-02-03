@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # Change project and application name to your own
 set(MY_PROJECT_NAME AwesomeProject)
@@ -36,10 +36,10 @@ endif()
 #-----------------------------------------------------------------------------
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  # require at least gcc 4.9 as provided by ppa:ubuntu-toolchain-r/test for Ubuntu 12.04
+  # require at least gcc 4.9 as provided by ppa:ubuntu-toolchain-r/test for Ubuntu 14.04
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.9)
     message(FATAL_ERROR "GCC version must be at least 4.9
-If you are using Ubuntu 12.04, you can easily install gcc and g++ 4.9 (or any later version available) in addition to your version ${CMAKE_CXX_COMPILER_VERSION}:
+If you are using Ubuntu 14.04, you can easily install gcc and g++ 4.9 (or any later version available) in addition to your version ${CMAKE_CXX_COMPILER_VERSION}:
   sudo add-apt-repository ppa:ubuntu-toolchain-r/test
   sudo apt-get update
   sudo apt-get install gcc-4.9 g++-4.9
@@ -161,7 +161,7 @@ endif()
 # Prerequesites
 #-----------------------------------------------------------------------------
 
-find_package(MITK 2016.03.0 REQUIRED)
+find_package(MITK 2016.11.0 REQUIRED)
 
 if(COMMAND mitkFunctionCheckMitkCompatibility)
   mitkFunctionCheckMitkCompatibility(VERSIONS MITK_VERSION_PLUGIN_SYSTEM 1 REQUIRED)
@@ -271,7 +271,7 @@ set(${PROJECT_NAME}_EXE_LINKER_FLAGS ${MITK_EXE_LINKER_FLAGS})
 set(${PROJECT_NAME}_SHARED_LINKER_FLAGS ${MITK_SHARED_LINKER_FLAGS})
 set(${PROJECT_NAME}_MODULE_LINKER_FLAGS ${MITK_MODULE_LINKER_FLAGS})
 
-# Add custom project flags here (e.g. for C++11 support)
+# Add custom project flags here (e.g. for C++14 support)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
   # Get the gcc version. Some MITK CMake macros rely on the CMake
@@ -344,7 +344,7 @@ endif()
 # Qt support
 #-----------------------------------------------------------------------------
 
-if(MITK_USE_QT)
+if(MITK_USE_Qt5)
   set(QT_QMAKE_EXECUTABLE ${MITK_QMAKE_EXECUTABLE})
   add_definitions(-DQWT_DLL)
 endif()
@@ -426,16 +426,3 @@ include(mitkInstallRules)
 #-----------------------------------------------------------------------------
 # Last configuration steps
 #-----------------------------------------------------------------------------
-
-# If we are under Windows, create two batch files which correctly
-# set up the environment for the application and for Visual Studio
-if(WIN32)
-  include(mitkFunctionCreateWindowsBatchScript)
-
-  set(VS_SOLUTION_FILE "${PROJECT_BINARY_DIR}/${PROJECT_NAME}.sln")
-  foreach(VS_BUILD_TYPE debug release)
-    mitkFunctionCreateWindowsBatchScript("${PROJECT_SOURCE_DIR}/CMake/StartVS.bat.in"
-      ${PROJECT_BINARY_DIR}/StartVS_${VS_BUILD_TYPE}.bat
-      ${VS_BUILD_TYPE})
-  endforeach()
-endif(WIN32)

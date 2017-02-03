@@ -19,7 +19,8 @@ if(NOT MITK_DIR)
   option(MITK_BUILD_TESTING "Build the MITK unit tests" OFF)
   option(MITK_USE_CTK "Use CTK in MITK" ${MITK_USE_BLUEBERRY})
   option(MITK_USE_DCMTK "Use DCMTK in MITK" ON)
-  option(MITK_USE_QT "Use Nokia's Qt library in MITK" ON)
+  option(MITK_USE_Qt5 "Use Qt 5 library in MITK" ON)
+  option(MITK_USE_Qt5_WebEngine "Use Qt 5 WebEngine library" ON)
   option(MITK_USE_OpenCV "Use Intel's OpenCV library" OFF)
   option(MITK_USE_Python "Enable Python wrapping in MITK" OFF)
 
@@ -28,9 +29,9 @@ if(NOT MITK_DIR)
     set(MITK_USE_CTK ON CACHE BOOL "Use CTK in MITK" FORCE)
   endif()
 
-  if(MITK_USE_CTK AND NOT MITK_USE_QT)
-    message("Forcing MITK_USE_QT to ON because of MITK_USE_CTK")
-    set(MITK_USE_QT ON CACHE BOOL "Use Nokia's Qt library in MITK" FORCE)
+  if(MITK_USE_CTK AND NOT MITK_USE_Qt5)
+    message("Forcing MITK_USE_Qt5 to ON because of MITK_USE_CTK")
+    set(MITK_USE_QT ON CACHE BOOL "Use Qt 5 library in MITK" FORCE)
   endif()
 
   set(MITK_USE_CableSwig ${MITK_USE_Python})
@@ -50,27 +51,31 @@ if(NOT MITK_DIR)
     MITK_BUILD_ALL_PLUGINS
     MITK_USE_CTK
     MITK_USE_DCMTK
-    MITK_USE_QT
+    MITK_USE_Qt5
+    MITK_USE_Qt5_WebEngine
     MITK_USE_OpenCV
     MITK_USE_Python
    )
 
-  if(MITK_USE_QT)
-    # Look for Qt at the superbuild level, to catch missing Qt libs early
-	  find_package(Qt5 5.0.0 COMPONENTS
-		  Concurrent
-		  OpenGL
-		  PrintSupport
-		  Script
-		  Sql
-		  Svg
-      Widgets
-		  WebKitWidgets
-		  Xml
-		  XmlPatterns
-		  UiTools
-      Help
-		  REQUIRED)
+  if(MITK_USE_Qt5)
+    set(MITK_QT5_MINIMUM_VERSION 5.6.0)
+    set(MITK_QT5_COMPONENTS Concurrent OpenGL PrintSupport Script Sql Svg Widgets Xml XmlPatterns UiTools Help LinguistTools)
+    if(MITK_USE_Qt5_WebEngine)
+      set(MITK_QT5_COMPONENTS ${MITK_QT5_COMPONENTS} WebEngineWidgets)
+    endif()
+    if(APPLE)
+      set(MITK_QT5_COMPONENTS ${MITK_QT5_COMPONENTS} DBus)
+    endif()
+    find_package(Qt5 ${MITK_QT5_MINIMUM_VERSION} COMPONENTS ${MITK_QT5_COMPONENTS} REQUIRED)
+    if(Qt5_DIR)
+      get_filename_component(_Qt5_DIR "${Qt5_DIR}/../../../" ABSOLUTE)
+      list(FIND CMAKE_PREFIX_PATH "${_Qt5_DIR}" _result)
+      if(_result LESS 0)
+        set(CMAKE_PREFIX_PATH "${_Qt5_DIR};${CMAKE_PREFIX_PATH}" CACHE PATH "" FORCE)
+      endif()
+    endif()
+  elseif(MITK_USE_Qt5_WebEngine)
+    set(MITK_USE_Qt5_WebEngine OFF)
   endif()
 
   # Configure the set of default pixel types
@@ -83,7 +88,7 @@ if(NOT MITK_DIR)
       CACHE STRING "List of floating pixel types used in AccessByItk and InstantiateAccessFunction macros")
 
   set(MITK_ACCESSBYITK_COMPOSITE_PIXEL_TYPES
-      ""
+      "itk::RGBPixel<unsigned char>, itk::RGBAPixel<unsigned char>"
       CACHE STRING "List of composite pixel types used in AccessByItk and InstantiateAccessFunction macros")
 
   set(MITK_ACCESSBYITK_DIMENSIONS
@@ -117,8 +122,8 @@ if(NOT MITK_DIR)
   endif()
 
   set(MITK_SOURCE_DIR "" CACHE PATH "MITK source code location. If empty, MITK will be cloned from MITK_GIT_REPOSITORY")
-  set(MITK_GIT_REPOSITORY "https://phabricator.mitk.org/diffusion/MITK/mitk.git" CACHE STRING "The git repository for cloning MITK")
-  set(MITK_GIT_TAG "releases/2016-03" CACHE STRING "The git tag/hash to be used when cloning from MITK_GIT_REPOSITORY")
+  set(MITK_GIT_REPOSITORY "https://phabricator.mitk.org/source/mitk.git" CACHE STRING "The git repository for cloning MITK")
+  set(MITK_GIT_TAG "releases/2016-11" CACHE STRING "The git tag/hash to be used when cloning from MITK_GIT_REPOSITORY")
   mark_as_advanced(MITK_SOURCE_DIR MITK_GIT_REPOSITORY MITK_GIT_TAG)
 
   #-----------------------------------------------------------------------------
@@ -134,7 +139,7 @@ if(NOT MITK_DIR)
   # Additional MITK CMake variables
   #-----------------------------------------------------------------------------
 
-  if(MITK_USE_QT AND QT_QMAKE_EXECUTABLE)
+  if(MITK_USE_Qt5 AND QT_QMAKE_EXECUTABLE)
     list(APPEND additional_mitk_cmakevars "-DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}")
   endif()
 
