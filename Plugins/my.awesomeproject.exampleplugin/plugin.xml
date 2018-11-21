@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugin>
-  <extension point="org.blueberry.ui.views">
-    <view id="my.awesomeproject.views.awesomeview"
-          name="Awesome View"
-          class="AwesomeView"
-          icon="resources/AwesomeIcon.png" />
-  </extension>
-</plugin>

@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/ExampleApp">
-        <file>icon_research.xpm</file>
-        <file>MyLogo.png</file>
-    </qresource>
-</RCC>

@@ -1,8 +1,0 @@
-PROJECT(my_awesomeproject_renderwindoweditor)
-
-mitk_create_plugin(
-  EXPORT_DIRECTIVE MY_AWESOMEPROJECT_RENDERWINDOWEDITOR
-  EXPORTED_INCLUDE_SUFFIXES src
-  MODULE_DEPENDS MitkQtWidgets
-  SUBPROJECTS MITK-CoreUI
-  )
