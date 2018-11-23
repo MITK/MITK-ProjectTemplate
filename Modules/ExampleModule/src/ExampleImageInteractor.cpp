@@ -135,7 +135,7 @@ void ExampleImageInteractor::DataNodeChanged()
 // The state machine is wired up with this Paint method. We wrote a few helper
 // functions at the top of this files to keep this method clear and easy to
 // read.
-void ExampleImageInteractor::Paint(mitk::StateMachineAction* action, mitk::InteractionEvent* event)
+void ExampleImageInteractor::Paint(mitk::StateMachineAction*, mitk::InteractionEvent* event)
 {
   try
   {
