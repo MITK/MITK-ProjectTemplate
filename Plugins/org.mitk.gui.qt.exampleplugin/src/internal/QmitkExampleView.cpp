@@ -34,13 +34,17 @@ namespace
   // into ExtExampleModule as resources.
   static ExampleImageInteractor::Pointer CreateExampleImageInteractor()
   {
-    auto extExampleModule = us::ModuleRegistry::GetModule("ExtExampleModule");
+    auto exampleModule = us::ModuleRegistry::GetModule("MitkExampleModule");
 
-    auto interactor = ExampleImageInteractor::New();
-    interactor->LoadStateMachine("Paint.xml", extExampleModule);
-    interactor->SetEventConfig("PaintConfig.xml", extExampleModule);
+    if (nullptr != exampleModule)
+    {
+      auto interactor = ExampleImageInteractor::New();
+      interactor->LoadStateMachine("Paint.xml", exampleModule);
+      interactor->SetEventConfig("PaintConfig.xml", exampleModule);
+      return interactor;
+    }
 
-    return interactor;
+    return nullptr;
   }
 }
 
