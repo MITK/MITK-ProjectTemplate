@@ -26,6 +26,8 @@ namespace Ui
   class ExampleSegTool2DGUI;
 }
 
+// Look into ExampleSegTool2D.h for more information.
+
 class MITKEXAMPLEMODULE_EXPORT ExampleSegTool2DGUI : public QmitkToolGUI
 {
   Q_OBJECT
