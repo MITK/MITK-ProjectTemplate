@@ -14,35 +14,32 @@ See LICENSE.txt or http://www.mitk.org for details.
 
 ===================================================================*/
 
-#ifndef ExampleSegTool2D_h
-#define ExampleSegTool2D_h
+#ifndef ExampleSegTool2DGUI_h
+#define ExampleSegTool2DGUI_h
 
-#include <mitkSegTool2D.h>
+#include <QmitkToolGUI.h>
+#include <QScopedPointer>
 #include <MitkExampleModuleExports.h>
 
-namespace us
+namespace Ui
 {
-  class ModuleResource;
+  class ExampleSegTool2DGUI;
 }
 
-class MITKEXAMPLEMODULE_EXPORT ExampleSegTool2D : public mitk::SegTool2D
+class MITKEXAMPLEMODULE_EXPORT ExampleSegTool2DGUI : public QmitkToolGUI
 {
+  Q_OBJECT
+
 public:
-  mitkClassMacro(ExampleSegTool2D, SegTool2D)
+  mitkClassMacro(ExampleSegTool2DGUI, QmitkToolGUI)
   itkFactorylessNewMacro(Self)
 
-  us::ModuleResource GetIconResource() const override;
-  const char *GetName() const override;
-  const char **GetXPM() const override;
-
 protected:
-  ExampleSegTool2D();
-  ~ExampleSegTool2D() override;
-
-  virtual void Paint(mitk::StateMachineAction* action, mitk::InteractionEvent* event);
+  ExampleSegTool2DGUI();
+  ~ExampleSegTool2DGUI() override;
 
 private:
-  void ConnectActionsAndFunctions() override;
+  QScopedPointer<Ui::ExampleSegTool2DGUI> m_Ui;
 };
 
 #endif
