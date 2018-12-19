@@ -25,6 +25,13 @@ namespace us
   class ModuleResource;
 }
 
+// NOTE: THIS IS AN EXPERIMENTAL FEATURE AND DOES NOT WORK WITH
+//       MITK 2018.04 OR EARLIER. CHECKOUT THE releases/2018-04
+//       BRANCH OF MITK TO MAKE IT WORK. THIS FEATURE IS GOING
+//       TO BE INTEGRATED WITH THE FIRST MITK 2018.04 BUGFIX
+//       UPDATE 2018.04.2. THE BRANCH IS ONLY AVAILABLE AT
+//       https://phabricator.mitk.org/source/mitk.git.
+
 // This is an example on how to add a segmentation tool to the standard
 // MITK Segmentation Views. Here's the crucial points to make it work:
 //
