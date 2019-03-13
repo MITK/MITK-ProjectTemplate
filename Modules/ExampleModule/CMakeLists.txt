@@ -1,5 +1,5 @@
 mitk_create_module(ExampleModule
-  DEPENDS PUBLIC MitkCore
+  DEPENDS PUBLIC MitkSegmentationUI
   PACKAGE_DEPENDS PRIVATE GuidelinesSupportLibrary
 )
 
