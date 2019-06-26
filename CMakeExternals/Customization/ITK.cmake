@@ -3,7 +3,7 @@
     customizations into account.
 
     The file's name must be equal to the external project's name. It may
-    contain the following four variables:
+    contain the following three variables:
 
       - CUSTOM_CMAKE_ARGS
       - CUSTOM_CMAKE_CACHE_ARGS
