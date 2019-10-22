@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
   parser.addArgument(
     "input",
     "i",
-    mitkCommandLineParser::InputFile,
+    mitkCommandLineParser::File,
     "Input Image",
     "Any image format known to MITK.",
     us::Any(),
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
   parser.addArgument(
     "output",
     "o",
-    mitkCommandLineParser::OutputFile,
+    mitkCommandLineParser::File,
     "Output file",
     "Where to save the output.",
     us::Any(),
