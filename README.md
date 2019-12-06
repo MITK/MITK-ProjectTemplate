@@ -1,7 +1,7 @@
 The MITK Project Template
 =========================
 
-This project provides a complete CMake-based set-up to get started with [MITK](http://mitk.org).
+This project provides a complete CMake-based set-up to get started with [MITK](https://github.com/MITK/MITK).
 
 Features
 --------
@@ -33,3 +33,11 @@ Supported platforms and other requirements
 ------------------------------------------
 
 See the [MITK documentation](http://docs.mitk.org/2018.04/).
+
+License
+-------
+
+Copyright (c) [German Cancer Research Center (DKFZ)](https://www.dkfz.de)<br>
+All rights reserved.
+
+The MITK-ProjectTemplate is part of [MITK](https://github.com/MITK/MITK) and as such available as free open-source software under a [3-clause BSD license](https://github.com/MITK/MITK-ProjectTemplate/blob/master/LICENSE).
