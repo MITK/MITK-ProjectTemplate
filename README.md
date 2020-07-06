@@ -1,7 +1,7 @@
 The MITK Project Template
 =========================
 
-This project provides a complete CMake-based set-up to get started with [MITK](https://github.com/MITK/MITK).
+#This project provides a complete CMake-based set-up to get started with [MITK](https://github.com/MITK/MITK).
 
 Features
 --------
