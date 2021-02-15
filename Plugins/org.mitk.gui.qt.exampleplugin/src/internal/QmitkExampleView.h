@@ -15,6 +15,7 @@ found in the LICENSE file.
 
 #include <berryISelectionListener.h>
 #include <QmitkAbstractView.h>
+#include <QmitkSingleNodeSelectionWidget.h>
 
 // There's an item "ExampleViewControls.ui" in the UI_FILES list in
 // files.cmake. The Qt UI Compiler will parse this file and generate a
@@ -45,17 +46,14 @@ public:
   void CreateQtPartControl(QWidget* parent) override;
 
 private slots:
+  void OnImageChanged(const QmitkSingleNodeSelectionWidget::NodeList& nodes);
   void ProcessSelectedImage();
 
 private:
   // Typically a one-liner. Set the focus to the default widget.
   void SetFocus() override;
 
-  // This method is conveniently called whenever the selection of Data Manager
-  // items changes.
-  void OnSelectionChanged(
-    berry::IWorkbenchPart::Pointer source,
-    const QList<mitk::DataNode::Pointer>& dataNodes) override;
+  void EnableWidgets(bool enable);
 
   // Generated from the associated UI file, it encapsulates all the widgets
   // of our view.
