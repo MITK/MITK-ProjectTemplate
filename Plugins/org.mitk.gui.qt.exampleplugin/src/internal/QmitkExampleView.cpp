@@ -13,6 +13,12 @@ found in the LICENSE file.
 #include <berryISelectionService.h>
 #include <berryIWorkbenchWindow.h>
 
+#include <mitkNodePredicateAnd.h>
+#include <mitkNodePredicateDataType.h>
+#include <mitkNodePredicateNot.h>
+#include <mitkNodePredicateOr.h>
+#include <mitkNodePredicateProperty.h>
+
 #include <usModuleRegistry.h>
 
 #include <QMessageBox>
@@ -27,7 +33,7 @@ namespace
   // Helper function to create a fully set up instance of our
   // ExampleImageInteractor, based on the state machine specified in Paint.xml
   // as well as its configuration in PaintConfig.xml. Both files are compiled
-  // into ExtExampleModule as resources.
+  // into MitkExampleModule as resources.
   static ExampleImageInteractor::Pointer CreateExampleImageInteractor()
   {
     auto exampleModule = us::ModuleRegistry::GetModule("MitkExampleModule");
@@ -52,8 +58,21 @@ void QmitkExampleView::CreateQtPartControl(QWidget* parent)
   // Setting up the UI is a true pleasure when using .ui files, isn't it?
   m_Controls.setupUi(parent);
 
+  m_Controls.selectionWidget->SetDataStorage(this->GetDataStorage());
+  m_Controls.selectionWidget->SetSelectionIsOptional(true);
+  m_Controls.selectionWidget->SetEmptyInfo(QStringLiteral("Select an image"));
+  m_Controls.selectionWidget->SetNodePredicate(mitk::NodePredicateAnd::New(
+    mitk::TNodePredicateDataType<mitk::Image>::New(),
+    mitk::NodePredicateNot::New(mitk::NodePredicateOr::New(
+      mitk::NodePredicateProperty::New("helper object"),
+      mitk::NodePredicateProperty::New("hidden object")))));
+
   // Wire up the UI widgets with our functionality.
+  connect(m_Controls.selectionWidget, &QmitkSingleNodeSelectionWidget::CurrentSelectionChanged, this, &QmitkExampleView::OnImageChanged);
   connect(m_Controls.processImageButton, SIGNAL(clicked()), this, SLOT(ProcessSelectedImage()));
+
+  // Make sure to have a consistent UI state at the very beginning.
+  this->OnImageChanged(m_Controls.selectionWidget->GetSelectedNodes());
 }
 
 void QmitkExampleView::SetFocus()
@@ -61,116 +80,72 @@ void QmitkExampleView::SetFocus()
   m_Controls.processImageButton->setFocus();
 }
 
-void QmitkExampleView::OnSelectionChanged(berry::IWorkbenchPart::Pointer, const QList<mitk::DataNode::Pointer>& dataNodes)
+void QmitkExampleView::OnImageChanged(const QmitkSingleNodeSelectionWidget::NodeList&)
 {
-  for (const auto& dataNode : dataNodes)
-  {
-    // Write robust code. Always check pointers before using them. If the
-    // data node pointer is null, the second half of our condition isn't
-    // even evaluated and we're safe (C++ short-circuit evaluation).
-    if (dataNode.IsNotNull() && nullptr != dynamic_cast<mitk::Image*>(dataNode->GetData()))
-    {
-      m_Controls.selectImageLabel->setVisible(false);
-      return;
-    }
-  }
+  this->EnableWidgets(m_Controls.selectionWidget->GetSelectedNode().IsNotNull());
+}
 
-  // Nothing is selected or the selection doesn't contain an image.
-  m_Controls.selectImageLabel->setVisible(true);
+void QmitkExampleView::EnableWidgets(bool enable)
+{
+  m_Controls.processImageButton->setEnabled(enable);
 }
 
 void QmitkExampleView::ProcessSelectedImage()
 {
-  // Before we even think about processing something, we need to make sure
-  // that we have valid input. Don't be sloppy, this is a main reason
-  // for application crashes if neglected.
+  auto selectedDataNode = m_Controls.selectionWidget->GetSelectedNode();
+  auto data = selectedDataNode->GetData();
 
-  auto selectedDataNodes = this->GetDataManagerSelection();
+  // We don't use the auto keyword here, which would evaluate to a native
+  // image pointer. Instead, we want a smart pointer to ensure that
+  // the image isn't deleted somewhere else while we're using it.
+  mitk::Image::Pointer image = dynamic_cast<mitk::Image*>(data);
 
-  if (selectedDataNodes.empty())
+  auto imageName = selectedDataNode->GetName();
+  auto offset = m_Controls.offsetSpinBox->value();
+
+  MITK_INFO << "Process image \"" << imageName << "\" ...";
+
+  // We're finally using the ExampleImageFilter from MitkExampleModule.
+  auto filter = ExampleImageFilter::New();
+  filter->SetInput(image);
+  filter->SetOffset(offset);
+
+  filter->Update();
+
+  mitk::Image::Pointer processedImage = filter->GetOutput();
+
+  if (processedImage.IsNull() || !processedImage->IsInitialized())
     return;
 
-  auto firstSelectedDataNode = selectedDataNodes.front();
+  MITK_INFO << "  done";
 
-  if (firstSelectedDataNode.IsNull())
-  {
-    QMessageBox::information(nullptr, "Example View", "Please load and select an image before starting image processing.");
-    return;
-  }
+  // Stuff the resulting image into a data node, set some properties,
+  // and add it to the data storage, which will eventually display the
+  // image in the application.
+  auto processedImageDataNode = mitk::DataNode::New();
+  processedImageDataNode->SetData(processedImage);
 
-  auto data = firstSelectedDataNode->GetData();
+  QString name = QString("%1 (Offset: %2)").arg(imageName.c_str()).arg(offset);
+  processedImageDataNode->SetName(name.toStdString());
 
-  // Something is selected, but does it contain data?
-  if (data != nullptr)
-  {
-    // We don't use the auto keyword here, which would evaluate to a native
-    // image pointer. Instead, we want a smart pointer in order to ensure that
-    // the image isn't deleted somewhere else while we're using it.
-    mitk::Image::Pointer image = dynamic_cast<mitk::Image*>(data);
+  // We don't really need to copy the level window, but if we wouldn't
+  // do it, the new level window would be initialized to display the image
+  // with optimal contrast in order to capture the whole range of pixel
+  // values. This is also true for the input image as long as one didn't
+  // modify its level window manually. Thus, the images would appear
+  // identical unless you compare the level window widget for both images.
+  mitk::LevelWindow levelWindow;
 
-    // Something is selected and it contains data, but is it an image?
-    if (image.IsNotNull())
-    {
-      auto imageName = firstSelectedDataNode->GetName();
-      auto offset = m_Controls.offsetSpinBox->value();
+  if (selectedDataNode->GetLevelWindow(levelWindow))
+    processedImageDataNode->SetLevelWindow(levelWindow);
 
-      MITK_INFO << "Process image \"" << imageName << "\" ...";
+  // We also attach our ExampleImageInteractor, which allows us to paint
+  // on the resulting images by using the mouse as long as the CTRL key
+  // is pressed.
+  auto interactor = CreateExampleImageInteractor();
 
-      // We're finally using the ExampleImageFilter from ExtExampleModule.
-      auto filter = ExampleImageFilter::New();
-      filter->SetInput(image);
-      filter->SetOffset(offset);
+  if (interactor.IsNotNull())
+    interactor->SetDataNode(processedImageDataNode);
 
-      filter->Update();
-
-      mitk::Image::Pointer processedImage = filter->GetOutput();
-
-      if (processedImage.IsNull() || !processedImage->IsInitialized())
-        return;
-
-      MITK_INFO << "  done";
-
-      // Stuff the resulting image into a data node, set some properties,
-      // and add it to the data storage, which will eventually display the
-      // image in the application.
-      auto processedImageDataNode = mitk::DataNode::New();
-      processedImageDataNode->SetData(processedImage);
-
-      QString name = QString("%1 (Offset: %2)").arg(imageName.c_str()).arg(offset);
-      processedImageDataNode->SetName(name.toStdString());
-
-      // We don't really need to copy the level window, but if we wouldn't
-      // do it, the new level window would be initialized to display the image
-      // with optimal contrast in order to capture the whole range of pixel
-      // values. This is also true for the input image as long as one didn't
-      // modify its level window manually. Thus, the images would appear
-      // identical unless you compare the level window widget for both images.
-      mitk::LevelWindow levelWindow;
-
-      if (firstSelectedDataNode->GetLevelWindow(levelWindow))
-        processedImageDataNode->SetLevelWindow(levelWindow);
-
-      // We also attach our ExampleImageInteractor, which allows us to paint
-      // on the resulting images by using the mouse as long as the CTRL key
-      // is pressed.
-      auto interactor = CreateExampleImageInteractor();
-
-      if (interactor.IsNotNull())
-        interactor->SetDataNode(processedImageDataNode);
-
-      this->GetDataStorage()->Add(processedImageDataNode);
-    }
-  }
-
-  // Now it's your turn. This class/method has lots of room for improvements,
-  // for example:
-  //
-  // - What happens when multiple items are selected but the first one isn't
-  //   an image? - There isn't any feedback for the user at all.
-  // - What's the front item of a selection? Does it depend on the order
-  //   of selection or the position in the Data Manager? - Isn't it
-  //   better to process all selected images? Don't forget to adjust the
-  //   titles of the UI widgets.
-  // - In addition to the the displayed label, it's probably a good idea to
-  //   enable or disable the button depending on the selection.
+  this->GetDataStorage()->Add(processedImageDataNode);
 }
