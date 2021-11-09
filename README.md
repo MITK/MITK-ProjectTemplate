@@ -20,7 +20,7 @@ How it works
 ------------
 
 1. Clone [MITK](https://github.com/MITK/MITK) and checkout the latest release tag or at least the stable master branch
-2. Clone MITK-ProjectTemplate and checkout the matching tag or branch
+2. Click on "Use this template", or clone/fork the MITK-ProjectTemplate, checking out the matching tag or branch
 3. Configure the MITK superbuild and set the CMake cache variable `MITK_EXTENSION_DIRS` to your working copy of the project template
 4. Generate and build the MITK superbuild
 
@@ -29,7 +29,7 @@ The project template is virtually integrated right into the MITK superbuild and 
 Supported platforms and other requirements
 ------------------------------------------
 
-See the [MITK documentation](http://docs.mitk.org/2018.04/).
+See the [MITK documentation](http://docs.mitk.org/2021.10/).
 
 License
 -------
