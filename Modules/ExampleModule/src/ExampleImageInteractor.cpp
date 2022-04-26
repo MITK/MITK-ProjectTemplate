@@ -77,51 +77,27 @@ static void Paint(mitk::Image::Pointer image, itk::Index<3> index, unsigned int 
 {
   switch (image->GetPixelType().GetComponentType())
   {
-#if ITK_VERSION_MAJOR < 5
-  case itk::ImageIOBase::CHAR:
-#else
   case itk::IOComponentEnum::CHAR:
-#endif
     Paint<char>(image, index, timeStep);
     break;
 
-#if ITK_VERSION_MAJOR < 5
-  case itk::ImageIOBase::UCHAR:
-#else
   case itk::IOComponentEnum::UCHAR:
-#endif
     Paint<unsigned char>(image, index, timeStep);
     break;
 
-#if ITK_VERSION_MAJOR < 5
-  case itk::ImageIOBase::SHORT:
-#else
   case itk::IOComponentEnum::SHORT:
-#endif
     Paint<short>(image, index, timeStep);
     break;
 
-#if ITK_VERSION_MAJOR < 5
-  case itk::ImageIOBase::USHORT:
-#else
   case itk::IOComponentEnum::USHORT:
-#endif
     Paint<unsigned short>(image, index, timeStep);
     break;
 
-#if ITK_VERSION_MAJOR < 5
-  case itk::ImageIOBase::INT:
-#else
   case itk::IOComponentEnum::INT:
-#endif
     Paint<int>(image, index, timeStep);
     break;
 
-#if ITK_VERSION_MAJOR < 5
-  case itk::ImageIOBase::UINT:
-#else
   case itk::IOComponentEnum::UINT:
-#endif
     Paint<unsigned int>(image, index, timeStep);
     break;
 
