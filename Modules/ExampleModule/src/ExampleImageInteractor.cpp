@@ -77,27 +77,27 @@ static void Paint(mitk::Image::Pointer image, itk::Index<3> index, unsigned int 
 {
   switch (image->GetPixelType().GetComponentType())
   {
-  case itk::ImageIOBase::CHAR:
+  case itk::IOComponentEnum::CHAR:
     Paint<char>(image, index, timeStep);
     break;
 
-  case itk::ImageIOBase::UCHAR:
+  case itk::IOComponentEnum::UCHAR:
     Paint<unsigned char>(image, index, timeStep);
     break;
 
-  case itk::ImageIOBase::SHORT:
+  case itk::IOComponentEnum::SHORT:
     Paint<short>(image, index, timeStep);
     break;
 
-  case itk::ImageIOBase::USHORT:
+  case itk::IOComponentEnum::USHORT:
     Paint<unsigned short>(image, index, timeStep);
     break;
 
-  case itk::ImageIOBase::INT:
+  case itk::IOComponentEnum::INT:
     Paint<int>(image, index, timeStep);
     break;
 
-  case itk::ImageIOBase::UINT:
+  case itk::IOComponentEnum::UINT:
     Paint<unsigned int>(image, index, timeStep);
     break;
 
