@@ -1,3 +1,9 @@
 /**
-\page org_mitk_exampleplugin Example Plugin
+\page org_mitk_views_exampleview Example View
+
+This is the user guide of the Example View.
+It is shown to a user if the context-specific help page was requested (F1 key).
+Its page id must be equal to the corresponding view id located in plugin.xml.
+Replace dots by underscores.
+
 */
