@@ -29,7 +29,7 @@ The project template is virtually integrated right into the MITK superbuild and 
 Supported platforms and other requirements
 ------------------------------------------
 
-See the [MITK documentation](http://docs.mitk.org/2023.04/).
+See the [MITK documentation](http://docs.mitk.org/2023.12/).
 
 License
 -------
