@@ -61,7 +61,6 @@ public:
 
   us::ModuleResource GetIconResource() const override;
   const char *GetName() const override;
-  const char **GetXPM() const override;
 
 protected:
   ExampleSegTool2D();

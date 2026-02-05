@@ -48,8 +48,3 @@ const char *ExampleSegTool2D::GetName() const
 {
   return "Example";
 }
-
-const char **ExampleSegTool2D::GetXPM() const
-{
-  return nullptr;
-}
