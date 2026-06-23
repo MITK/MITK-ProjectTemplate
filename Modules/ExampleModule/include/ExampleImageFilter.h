@@ -23,7 +23,7 @@ found in the LICENSE file.
 // While you are free to derive directly from ITK filter base classes,
 // MITK filter base classes provide typed accessor methods for the inputs
 // and outputs, which will save you and your clients lots of manual casting.
-class MITKEXAMPLEMODULE_EXPORT ExampleImageFilter final : public mitk::ImageToImageFilter
+class MITKEXAMPLEMODULE_EXPORT ExampleImageFilter : public mitk::ImageToImageFilter
 {
 public:
   // All classes that derive from an ITK-based MITK class need at least the
