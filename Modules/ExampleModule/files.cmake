@@ -1,7 +1,12 @@
 set(CPP_FILES
+  ExampleDataStructure.cpp
+  ExampleDataStructureMapper2D.cpp
+  ExampleDataStructureMapper3D.cpp
+  ExampleDataStructureMapperHelper.cpp
   ExampleImageFilter.cpp
   ExampleImageInteractor.cpp
   ExampleModule.cpp
+  ExampleObjectFactory.cpp
   ExampleSegTool2D.cpp
   ExampleSegTool2DGUI.cpp
 )
