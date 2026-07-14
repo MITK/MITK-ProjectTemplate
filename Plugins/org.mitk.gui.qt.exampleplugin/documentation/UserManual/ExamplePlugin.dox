@@ -1,9 +1,28 @@
 /**
 \page org_mitk_views_exampleview Example View
 
-This is the user guide of the Example View.
-It is shown to a user if the context-specific help page was requested (F1 key).
-Its page id must be equal to the corresponding view id located in plugin.xml.
-Replace dots by underscores.
+The Example View demonstrates how a plugin contributes a view to the MITK
+Workbench. It applies the example image filter to a selected image and lets you
+paint on the result.
+
+\tableofcontents
+
+\section org_mitk_views_exampleview_usage Usage
+
+-# Load an image into the application.
+-# Select it in the image selector at the top of the view.
+-# Choose an offset and press "Add Offset". A new image node named
+   "&lt;image&gt; (Offset: &lt;offset&gt;)" is added to the Data Manager, holding the
+   input image with the offset added to every voxel.
+-# The new image has a painting interactor attached: hold the Ctrl key and click
+   or drag in a 2-D window to set voxels under the cursor to the minimum value.
+
+\section org_mitk_views_exampleview_developers Notes for developers
+
+This page is the context-sensitive help that appears when the user presses F1 in
+the view. Doxygen locates it by its page id, which must equal the view id
+declared in \c plugin.xml with the dots replaced by underscores
+(\c org.mitk.views.exampleview becomes \c org_mitk_views_exampleview). Use this
+page as the model for documenting your own view.
 
 */

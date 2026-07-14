@@ -1,40 +1,83 @@
-The MITK Project Template
-=========================
+# The MITK Project Template
 
-This project provides a complete CMake-based set-up to get started with [MITK](https://github.com/MITK/MITK).
+A ready-to-build project that shows how to extend the
+[MITK](https://github.com/MITK/MITK) Workbench with your own C++ code: custom
+data types, image processing, interactions, tools, views, and applications.
 
-Features
---------
+## Why this template?
 
-- Example module
-  - ITK-based image filter
-  - Interactor to paint in images
-- Example command-line app
-  - Uses the image filter of the example module
-- Example plugin
-  - GUI for the image filter and interactor of the example module
-- Example external project
-  - Microsoft's Guidelines Support Library (GSL)
+MITK is a toolkit. When you want to add your own functionality to the MITK
+Workbench, you do not fork MITK. Instead you write **modules** (C++ libraries),
+**plugins** (Workbench UI), **command-line apps**, and, if needed, pull in your
+own **external projects**. This template is a working project made of exactly
+those pieces, wired into the MITK build so you can start from something that
+already compiles and runs.
 
-How it works
-------------
+Every example is small and heavily commented. Read the code alongside the
+[Documentation](Documentation), which explains what each example teaches and
+why.
 
-1. Clone [MITK](https://github.com/MITK/MITK) and checkout the latest release tag or at least the stable master branch
-2. Click on "Use this template", or clone/fork the MITK-ProjectTemplate, checking out the matching tag or branch
-3. Configure the MITK superbuild and set the CMake cache variable `MITK_EXTENSION_DIRS` to your working copy of the project template
-4. Generate and build the MITK superbuild
+> If you only want to call MITK's algorithms from Python rather than extend the
+> Workbench, look at the `mitk-python` package instead. This template is for
+> building C++ modules and plugins.
 
-The project template is virtually integrated right into the MITK superbuild and MITK build as if it would be part of MITK. You can extend MITK with your own modules, plugins, command-line apps, and external projects without touching the MITK source code resp. repository.
+## What's inside
 
-Supported platforms and other requirements
-------------------------------------------
+- **Example module** (`Modules/ExampleModule`)
+  - A **custom data type** (`ExampleDataStructure`) with its own **file reader
+    and writer** (auto-loaded IO) and **2D/3D rendering** (custom mappers)
+  - An **ITK-based image filter** (`ExampleImageFilter`)
+  - A **data interactor** that paints into images (`ExampleImageInteractor`)
+  - A **segmentation tool** (`ExampleSegTool2D`) for the Segmentation views
+  - **Unit tests** (`test/`)
+- **Example command-line app** (`Modules/ExampleModule/cmdapps`, `ExampleCmdApp`)
+- **Example plugins**
+  - A Workbench **view** (`Plugins/org.mitk.gui.qt.exampleplugin`)
+  - An **eager-activation** plugin (`Plugins/org.mitk.exampleplugin.eageractivation`)
+- **Example standalone application** (`Applications/ExampleApp`, `MitkExampleApp`)
+- **Example external project** (Microsoft's GSL) and **external-project
+  customization** (extra ITK modules)
 
-See the [MITK documentation](http://docs.mitk.org/nightly/).
+## Quick start
 
-License
--------
+You do not build this template on its own. You point the MITK **superbuild** at
+it with the `MITK_EXTENSION_DIRS` cache variable, and it is built as if it were
+part of MITK.
+
+1. Get MITK and this template (for example via "Use this template" on GitHub, or
+   by cloning), checking out matching release tags of both.
+2. Configure the MITK superbuild with `MITK_EXTENSION_DIRS` set to this working
+   copy, then build. On Windows:
+
+   ```bash
+   cmake -S MITK -B MITK-superbuild -G "Visual Studio 17 2022" ^
+     -D MITK_EXTENSION_DIRS=C:/path/to/MITK-ProjectTemplate
+   cmake --build MITK-superbuild --config Release
+   ```
+
+3. Launch the MITK Workbench from the inner build tree and open the **Example
+   View** (category "Examples").
+
+See [Documentation/01-getting-started.md](Documentation/01-getting-started.md)
+for prerequisites, Linux/macOS commands, running the tests, and launching the
+applications.
+
+## Documentation
+
+- [Getting started](Documentation/01-getting-started.md): build, run, and test.
+- [A tour of the examples](Documentation/02-tour-of-the-examples.md): what each
+  example teaches and where to look.
+- [Make it your own](Documentation/03-make-it-your-own.md): turn the template
+  into your own project.
+
+Requirements and supported platforms match MITK itself; see the
+[MITK documentation](https://docs.mitk.org/nightly/).
+
+## License
 
 Copyright (c) [German Cancer Research Center (DKFZ)](https://www.dkfz.de)<br>
 All rights reserved.
 
-The MITK-ProjectTemplate is part of [MITK](https://github.com/MITK/MITK) and as such available as free open-source software under a [3-clause BSD license](https://github.com/MITK/MITK-ProjectTemplate/blob/master/LICENSE).
+The MITK-ProjectTemplate is part of [MITK](https://github.com/MITK/MITK) and is
+available as free open-source software under a
+[3-clause BSD license](LICENSE).
