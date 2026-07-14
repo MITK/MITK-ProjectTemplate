@@ -72,7 +72,7 @@ static void Paint(mitk::Image::Pointer image, itk::Index<3> index, unsigned int 
 // Helper function to multiplex the actual Paint function call for different
 // pixel types. As it's cumbersome and ugly, you may want to avoid such
 // functions by using ITK for the actual painting and use the ITK access
-// macros like we did for the AwesomeImageFilter.
+// macros like we did for the ExampleImageFilter.
 static void Paint(mitk::Image::Pointer image, itk::Index<3> index, unsigned int timeStep)
 {
   switch (image->GetPixelType().GetComponentType())
@@ -129,7 +129,7 @@ void ExampleImageInteractor::DataNodeChanged()
 }
 
 // The state machine is wired up with this Paint method. We wrote a few helper
-// functions at the top of this files to keep this method clear and easy to
+// functions at the top of this file to keep this method clear and easy to
 // read.
 void ExampleImageInteractor::Paint(mitk::StateMachineAction*, mitk::InteractionEvent* event)
 {
@@ -166,7 +166,7 @@ void ExampleImageInteractor::Paint(mitk::StateMachineAction*, mitk::InteractionE
 
       // Nearly done. We request the renderer to update the render window in
       // order to see the result immediately. Actually, we should update all
-      // of the render windows by caling RequestUpdateAll() instead, as the
+      // of the render windows by calling RequestUpdateAll() instead, as the
       // painted pixels are possibly visible in other render windows, too.
       // However, we decided to prefer performance here.
       mitk::RenderingManager::GetInstance()->RequestUpdate(positionEvent->GetSender()->GetRenderWindow());

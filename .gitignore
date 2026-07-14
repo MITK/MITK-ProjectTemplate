@@ -1,0 +1,23 @@
+# The project template is built out of source through the MITK superbuild
+# (see README.md). These entries only guard against editor, OS, and
+# accidental in-source build artifacts ending up in the repository.
+
+# Build trees, in case one is created inside the source directory
+/build/
+/*-build/
+/*-superbuild/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeUserPresets.json
+
+# Editors and IDEs
+*.user
+.vs/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
