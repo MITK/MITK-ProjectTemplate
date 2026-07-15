@@ -65,7 +65,7 @@ public:
   // Direct read access to the points, e.g. for the mappers and the writer.
   const std::vector<LabeledPoint>& GetPoints() const;
 
-  void Clear();
+  void ClearPoints();
 
   // mitk::BaseData interface. The data lives entirely in main memory and is
   // not produced by a pipeline, so the region bookkeeping is trivial. The one

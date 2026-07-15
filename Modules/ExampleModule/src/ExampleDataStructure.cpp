@@ -48,7 +48,7 @@ const std::vector<ExampleDataStructure::LabeledPoint>& ExampleDataStructure::Get
   return m_Points;
 }
 
-void ExampleDataStructure::Clear()
+void ExampleDataStructure::ClearPoints()
 {
   m_Points.clear();
   this->Modified();
