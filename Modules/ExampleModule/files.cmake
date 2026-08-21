@@ -6,7 +6,7 @@ set(CPP_FILES
   ExampleImageFilter.cpp
   ExampleImageInteractor.cpp
   ExampleModule.cpp
-  ExampleObjectFactory.cpp
+  ExampleModuleActivator.cpp
   ExampleSegTool2D.cpp
   ExampleSegTool2DGUI.cpp
 )

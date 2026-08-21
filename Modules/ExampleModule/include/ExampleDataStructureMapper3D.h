@@ -37,8 +37,9 @@ public:
   mitkClassMacro(ExampleDataStructureMapper3D, mitk::VtkMapper)
   itkFactorylessNewMacro(Self)
 
-  // Register the default rendering properties on a node. Called by
-  // ExampleObjectFactory so that even a freshly loaded node looks right.
+  // Register the default rendering properties on a node. Applied via the
+  // mapper provider registered in ExampleModuleActivator, so that even a
+  // freshly loaded node looks right.
   static void SetDefaultProperties(mitk::DataNode* node, mitk::BaseRenderer* renderer = nullptr, bool overwrite = false);
 
   vtkProp* GetVtkProp(mitk::BaseRenderer* renderer) override;

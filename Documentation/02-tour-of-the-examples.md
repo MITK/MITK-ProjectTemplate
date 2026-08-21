@@ -48,14 +48,15 @@ This is the "add your own kind of data to MITK" story, in three parts.
   `LocalStorage`, `GetVtkProp()` is a trivial lookup, and the VTK pipeline is
   rebuilt in `GenerateDataForRenderer()` only when the data or (for 2D) the
   slice changed.
-  [`ExampleObjectFactory`](../Modules/ExampleModule/src/ExampleObjectFactory.cpp)
-  is what tells MITK to use those mappers for this data type, including for data
+  The mapper providers registered in
+  [`ExampleModuleActivator`](../Modules/ExampleModule/src/ExampleModuleActivator.cpp)
+  are what tell MITK to use those mappers for this data type, including for data
   that was just loaded from a file.
 
 The neat trick that ties it together: the IO submodule depends on the main
-module, so auto-loading the IO also loads the main module, which registers the
-rendering factory. That is why a dropped `.exampledata` file both loads *and*
-renders without anyone writing glue code.
+module, so auto-loading the IO also loads the main module, whose activator
+registers the mapper providers. That is why a dropped `.exampledata` file both
+loads *and* renders without anyone writing glue code.
 
 ### Example image filter
 
