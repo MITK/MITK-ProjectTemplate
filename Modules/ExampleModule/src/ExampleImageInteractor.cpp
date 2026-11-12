@@ -138,7 +138,7 @@ void ExampleImageInteractor::Paint(mitk::StateMachineAction*, mitk::InteractionE
     auto renderer = event->GetSender();
 
     auto image = GetImage(this->GetDataNode());
-    auto timeStep = renderer->GetTimeStep();
+    auto timeStep = renderer->GetTimeStep(image);
     auto geometry = GetGeometry(image, timeStep);
 
     // This method is wired up to mouse events. Thus, we can safely assume
